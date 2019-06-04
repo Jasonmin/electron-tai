@@ -1,12 +1,14 @@
 {
-  "name": "electron-quick-start",
+  "name": "electron-taiji",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=Icon.icns --out=./dist --asar --app-version=1.0.0",
+    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=Icon.icns --out=./dist --asar --app-version=1.0.0"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/Jasonmin/electron-taiji.git",
   "keywords": [
     "Electron",
     "quick",
