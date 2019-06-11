@@ -32,15 +32,25 @@ body {
 
 .login-header {
     padding: var(--about-space) 0;
-    border-bottom: 1px solid rgb(102, 10, 10);
 }
 
 .login-logo {
     display: block;
     margin: 0 auto;
-    width: 220px;
+    width: 90px;
     /* TODO: Adjust asset to this size */
     max-width: 100%;
+}
+
+.lgoin-input {
+    margin: 0 auto;
+    width: 200px;
+    height: 30;
+}
+
+.login-button {
+    width: 200px;
+    color: white;
 }
 
 .login-sections {
