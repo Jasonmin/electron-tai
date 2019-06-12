@@ -4,28 +4,70 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var url = "https://124.204.65.86:14430/api/auth/jwt/login";
+            var param = {
+                username: "houxw",
+                password: "E10ADC3949BA59ABBE56E057F20F883E"
+            };
+            $("button").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(param),
+                    dataType: "JSON",
+                    traditional: true, //这使json格式的字符不会被转码
+                    contentType: "application/json; charset=utf-8",
+                    // async: true,
+                    timeout: 50000,
+                    success: function(data, status) {
+                        alert("success" + "数据: \n" + data + "\n状态: " + status);
+                    },
+                    error: function(des) {
+
+                        alert("fail" + JSON.stringify(des));
+                    }
+                });
+            });
+        });
+
+        // $(document).ready(function() {
+        //     var url = "https://www.runoob.com/try/ajax/demo_test_post.php";
+        //     var param = {
+        //         name: "菜鸟教程",
+        //         url: "http://www.runoob.com"
+        //     }
+        //     $("button").click(function() {
+        //         $.ajax({
+        //             type: "POST",
+        //             url: url,
+        //             data: param,
+        //             success: function(data, status) {
+        //                 alert("success" + "数据: \n" + data + "\n状态: " + status)
+        //             },
+        //             error: function(des) {
+        //                 alert("fail" + JSON.stringify(des))
+        //             }
+        //         });
+        //     });
+        // });
+    </script>
 </head>
-<div class="login-wrapper">
-    <header class="login-header">
-        <img class="login-logo" src="./img/logo.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x," alt="Electron API Demos">
-    </header>
 
-    <div>移动采编</div>
+<img class="login-logo img-rounded" src="./img/logo.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x," alt="Electron API Demos">
+<div class="login-title">南昌全媒体大脑</div>
 
-    <body>
-        <input type="text" class="lgoin-input form-control" placeholder="账号" name="username">
-        <br>
-        <input type="text" class="lgoin-input form-control" placeholder="密码" name="password">
-        <br>
-        <br>
-        <button type="button" class="login-button btn btn-primary">登录</button>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div>V3.0</div>
+<body>
+    <input type="text" id="uname" class="lgoin-input form-control" placeholder="账号" name="username">
+    <br>
+    <input type="password" id="pwd" class="lgoin-input form-control" placeholder="密码" name="password">
+    <br>
+    <br>
+    <button type="button" class="btn btn-danger btn-block login-button" onclick="buttonClick()">登录</button>
+    <div id="demo"></div>
+    <div class="login-version">V3.0</div>
 
-    </body>
-
-
-</div>
+</body>

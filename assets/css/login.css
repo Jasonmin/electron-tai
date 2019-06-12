@@ -35,15 +35,17 @@ body {
 }
 
 .login-logo {
+    /* padding-top: 50px; */
     display: block;
-    margin: 0 auto;
+    margin: 5% auto 20px auto;
+    /* margin-top: 5%; */
     width: 90px;
     /* TODO: Adjust asset to this size */
     max-width: 100%;
 }
 
 .lgoin-input {
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
     width: 200px;
     height: 30;
 }
@@ -51,6 +53,17 @@ body {
 .login-button {
     width: 200px;
     color: white;
+    background-color: red
+}
+
+.login-title {
+    margin: 0 auto 20px auto;
+    color: red;
+}
+
+.login-version {
+    margin: 20px auto 20px auto;
+    color: gray;
 }
 
 .login-sections {
