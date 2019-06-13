@@ -1,19 +1,29 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 
+const glob = require('glob')
+const path = require('path')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+function initialize() {
+
+    loadDemos()
+}
+
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 800,
         webPreferences: {
             nodeIntegration: true
         }
     })
+
+    mainWindow.webContents.openDevTools()
 
     // and load the index.html of the app.
     // mainWindow.loadFile('assets/sections/index.html')
@@ -36,6 +46,8 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
+app.setName("南昌全媒体大脑")
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
     // On macOS it is common for applications and their menu bar
@@ -51,3 +63,12 @@ app.on('activate', function() {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+
+// Require each JS file in the main-process dir
+function loadDemos() {
+    const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
+    files.forEach((file) => { require(file) })
+}
+
+initialize()
