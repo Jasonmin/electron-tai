@@ -3,15 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-
     <link rel="stylesheet" type="text/css" href="./assets/css/login.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/global.css">
 
-    <title>Hello World!</title>
+    <title>南昌全媒体大脑</title>
+
+    <style type="text/css">
+        h2 {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <nav class="nav nav.is-shown">
+        <header class="nav-header">
+            <h2>南昌全媒体大脑</h2>
+        </header>
+
+        <div class="nav-item u-category-windows">
+            <h5 class="nav-category">
+                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg> 通讯录
+            </h5>
+            <button type="button" id="button-windows" data-section="windows" class="nav-button">在线通讯录</button>
+            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">群组</em></button>
+        </div>
+
+        <div class="nav-item u-category-windows">
+            <h5 class="nav-category">
+                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg> 应用中心
+            </h5>
+            <button type="button" id="button-windows" data-section="windows" class="nav-button">Web应用中心</button>
+        </div>
+
+        <div class="nav-item u-category-windows">
+            <h5 class="nav-category">
+                <svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg> 我
+            </h5>
+            <button type="button" id="button-windows" data-section="windows" class="nav-button">个人信息</button>
+            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">设置</em></button>
+        </div>
+
+    </nav>
+
+    <main class="content js-content">
+
+        <p>content AHHAAHH</p>
+
+    </main>
+
+    <!-- <h1>Hello World!</h1>
     We are using Node.js
     <script>
         document.write(process.versions.node)
@@ -25,13 +68,13 @@
 
     <h2>自定义</h2>
     <a style="font-size:20px" href="./assets/login.html">下载列表</a>
-
-    <br />
+    <br /> -->
 
     <script>
         // You can also require other files to run in this process
         require('./renderer.js')
         require('./assets/imports')
+            // require('./assets/nav')
     </script>
 </body>
 
