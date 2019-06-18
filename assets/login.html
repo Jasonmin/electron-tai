@@ -1,165 +1,77 @@
 <template class="task-template">
 
     <!-- <section id="login-section" class="section"> -->
-    <section id="login-section" >
-    
+    <section id="login-section" class="section js-section u-category-system">
+
         <head>
             <meta charset="UTF-8">
-            <link rel="stylesheet" type="text/css" href="./css/login.css">
-            <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+            <!-- <link rel="stylesheet" type="text/css" href="./css/login.css"> -->
+            <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
             <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-            <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    
+            <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
+
+            <!-- <link rel="import" href="./test.html"> -->
+
             <script>
-                // ajax
-                // $(document).ready(function() {
-                //     let url = "http://localhost:8888/jbook/list";
-                //     $("button").click(function() {
-                //         $.get(url, function(data, status) {
-                //             alert("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
-                //             console.log("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
-                //         });
-                //     });
-                // });
-    
-                // fetch ES6
-                // $(document).ready(function() {
-                //     let url = "http://localhost:8888/jbook/list";
-                //     $("button").click(function() {
-                //         fetch(url, {
-                //                 method: 'GET',
-                //             })
-                //             .then((res) => {
-                //                 res.json().then(function(obj) {
-                //                     console(`console:${JSON.stringify(obj)}`)
-                //                     alert(`hehe:${JSON.stringify(obj)}`)
-                //                 })
-                //             })
-                //             .then((res) => {
-                //                 alert(`gggg:${res.text()}`)
-                //                 console.log(res)
-                //             })
-                //     });
-                // });
-    
-                // $(document).ready(function() {
-                //     var url = "https://124.204.65.86:14430/api/auth/jwt/login";
-                //     $("button").click(function() {
-                //         fetch(url, {
-                //                 method: "POST",
-                //                 headers: {
-                //                     'content-type': 'application/json'
-                //                 },
-                //                 body: JSON.stringify({
-                //                     username: "houxw",
-                //                     password: "E10ADC3949BA59ABBE56E057F20F883E"
-                //                 })
-                //             })
-                //             .then(res => alert(`cc:${res.json()}`))
-                //             .catch(error => alert('Error:', error))
-                //             .then(response => alert('Success:', response));
-                //         // .then((res) => {
-                //         //     res.json().then(function(obj) {
-                //         //         alert(`hehe:${JSON.stringify(obj)}`)
-                //         //     })
-                //         //     alert(`bbbbb:${res.text()}`)
-                //         // })
-                //         // .then((res) => {
-                //         //     alert(`gggg:${res.text()}`)
-                //         //     console.log(res)
-                //         // })
-                //     });
-                // });
-    
-                // function testClick() {
-                //     // var url = "http://localhost:8888/jbook/list";
-                //     let url = "https://124.204.65.86:14430/api/auth/jwt/login";
-                //     $.ajax({
-                //         type: "POST",
-                //         url: url,
-                //         success: function(data, status) {
-                //             alert("success" + "数据: \n" + JSON.stringify(data) + "\n状态: " + status);
-                //         },
-                //         error: function(des) {
-                //             alert("fail" + JSON.stringify(des));
-                //         }
-                //     })
-                // }
-    
-                // function testClick() {
-                //     var url = "https://124.204.65.86:14430/api/auth/jwt/login";
-                //     var param = {
-                //         "username": "houxw",
-                //         "password": "E10ADC3949BA59ABBE56E057F20F883E"
-                //     };
-                //     $.ajax({
-                //         type: "POST",
-                //         url: url,
-                //         data: JSON.stringify(param),
-                //         dataType: "json",
-                //         crossDomain: false,
-                //         contentType: "application/json; charset=utf-8",
-                //         timeout: 50000,
-                //         success: function(data, status) {
-                //             alert("success" + "数据: \n" + data + "\n状态: " + status);
-                //         },
-                //         error: function(des) {
-                //             alert("fail" + JSON.stringify(des));
-                //         }
-                //     });
-                // }
-    
-                // $(document).ready(function() {
-                //     var url = "https://124.204.65.86:14430/api/auth/jwt/login";
-                //     var param = {
-                //         "username": "houxw",
-                //         "password": "E10ADC3949BA59ABBE56E057F20F883E"
-                //     };
-                //     $("button").click(function(e) {
-                //         e.preventDefault();
-                //         $.ajax({
-                //             type: "POST",
-                //             url: url,
-                //             data: param,
-                //             dataType: "text",
-                //             contentType: "application/json; charset=utf-8",
-                //             timeout: 50000,
-                //             success: function(data, status) {
-                //                 alert("success" + "数据: \n" + data + "\n状态: " + status);
-                //             },
-                //             error: function(des) {
-                //                 alert("fail" + JSON.stringify(des));
-                //             }
-                //         });
-                //     });
-                // });
+
+                var data = window.localStorage.getItem('loginModel');
+                console.log(data);
+
+                function loginAction() {
+
+                    var url = "https://124.204.65.86:14430/api/auth/jwt/login";
+                    console.log("request start")
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: "houxw",
+                            password: "E10ADC3949BA59ABBE56E057F20F883E"
+                        })
+                    })
+                        .then(res => {
+                            res.json().then(function (obj) {
+                                // alert(`hehe:${JSON.stringify(obj)}`)
+                                // localStorage.setItem('loginModel', JSON.stringify(obj));
+
+                                // var data = localStorage.getItem('loginModel');
+                                // console.log(data);
+                            })
+                        })
+                        .catch(error => {
+                            alert('Error:', error)
+                            console.log(error)
+                        })
+                }
             </script>
-    
-    
         </head>
-    
-        <img class="login-logo img-rounded" src="./img/logo@2x.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x,">
+
+        <!-- <img class="login-logo img-rounded" src="./img/logo@2x.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x,"> -->
         <div class="login-title">南昌全媒体大脑</div>
-    
+
         <body>
             <input type="text" id="uname" class="lgoin-input form-control" placeholder="账号" name="username">
             <br>
             <input type="password" id="pwd" class="lgoin-input form-control" placeholder="密码" name="password">
             <br>
             <br>
-            <button type="button" class="btn btn-danger btn-block login-button" onclick="buttonClick()">登录</button>
-            <!-- <button type="button" id="information-dialog" class="btn btn-danger btn-block login-button" onclick="testClick()">测试</button> -->
+            <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
+            <button type="button" class="btn btn-danger btn-block login-button" onclick="nextAction()">Next</button>
+
             <div id="demo "></div>
             <div class="login-version ">V3.0</div>
-    
-            <script type="text/javascript">
-                console.log('lslslls')
-                // var info = require('../renderer-process/information')
+
+            <script type="module">
+                import { Test } from './test.js'
+                var test = new Test()
+                test.test_log()
             </script>
-    
+
         </body>
-    
+
     </section>
 
 </template>
