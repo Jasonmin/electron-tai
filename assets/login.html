@@ -18,6 +18,9 @@
                 var data = window.localStorage.getItem('loginModel');
                 console.log(data);
 
+                var value = global.value
+                console.log(value)
+
                 function loginAction() {
 
                     var url = "https://124.204.65.86:14430/api/auth/jwt/login";
@@ -34,8 +37,8 @@
                     })
                         .then(res => {
                             res.json().then(function (obj) {
-                                // alert(`hehe:${JSON.stringify(obj)}`)
-                                // localStorage.setItem('loginModel', JSON.stringify(obj));
+                                alert(`hehe:${JSON.stringify(obj)}`)
+                                localStorage.setItem('loginModel', JSON.stringify(obj));
 
                                 // var data = localStorage.getItem('loginModel');
                                 // console.log(data);
@@ -64,11 +67,11 @@
             <div id="demo "></div>
             <div class="login-version ">V3.0</div>
 
-            <script type="module">
+            <!-- <script type="module">
                 import { Test } from './test.js'
                 var test = new Test()
                 test.test_log()
-            </script>
+            </script> -->
 
         </body>
 
