@@ -5,6 +5,7 @@
 
         <head>
             <meta charset="UTF-8">
+            <!-- <script src="/assets/static/config.js"></script> -->
             <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
             <!-- <link rel="stylesheet" type="text/css" href="./css/login.css"> -->
             <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,10 +21,15 @@
 
                 var value = global.value
                 console.log(value)
+            
 
                 function loginAction() {
 
-                    var url = "https://124.204.65.86:14430/api/auth/jwt/login";
+                    var baseUrl = globalConfig.BaseUrl
+                        console.log(baseUrl)
+
+                    // var url = "https://124.204.65.86:14430/api/auth/jwt/login";
+                    var url = `${baseUrl}/auth/jwt/login`;
                     console.log("request start")
                     fetch(url, {
                         method: "POST",
@@ -72,6 +78,11 @@
                 var test = new Test()
                 test.test_log()
             </script> -->
+
+            <script>
+            var baseUrl = globalConfig.BaseUrl
+                console.log(baseUrl)
+            </script>
 
         </body>
 
