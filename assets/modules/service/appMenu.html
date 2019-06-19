@@ -1,48 +1,69 @@
-
 <template class="task-template">
-        <section id="appMenu-section" class="section js-section u-category-system">
+    <section id="appMenu-section" class="section js-section u-category-system">
 
-                <head>
-                        <meta charset="UTF-8">
-                        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-                        <link rel="stylesheet"
-                                href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <head>
+            <meta charset="UTF-8">
 
-                        <script>
-                                request_getAppMenus()
-                                function request_getAppMenus() {
-                                        var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
 
-                                        fetch(url, {
-                                                method: "POST",
-                                                headers: {
-                                                        'Content-Type': 'application/x-www-form-urlencoded'
-                                                },
-                                                body: `token=CB2274245D179C276D1B26054F1E4EC5&userName=taiji`
-                                        })
-                                                .then(res => {
-                                                        res.json().then(function (obj) {
-                                                                console.log(JSON.stringify(obj))
-                                                                if (obj.code == 0) {
-                                                                        var menus = obj.data;
-                                                                        console.log(menus)
-                                                                }
-                                                        })
-                                                })
-                                                .catch(error => {
-                                                        alert('Error:', error)
-                                                        console.log(error)
-                                                })
+            <script>
+                request_getAppMenus()
+                function request_getAppMenus() {
+                    var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
+
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `token=CB2274245D179C276D1B26054F1E4EC5&userName=taiji`
+                    })
+                        .then(res => {
+                            res.json().then(function (obj) {
+                                // console.log(JSON.stringify(obj))
+                                if (obj.code == 0) {
+                                    var menus = obj.data;
+                                    console.log(menus)
+
+                                    let colCount = 4;
+                                    let rowCount = menus.length/colCount;
+
+                                    let grid = new Grid({
+                                        container: document.getElementsByClassName('grid')[0],// 必须项
+                                        colCount: colCount,
+                                        rowCount: rowCount,
+                                        width: 600,
+                                        height: 150*rowCount,
+                                    });
+                                    // grid.setGridStyleByIndex(0, { "background": "red" });
+                                    let grids = grid.getGrids();
+                                    for (let i = 0; i < menus.length; i++) {
+                                        let item = menus[i]
+
+                                        grids[i].innerHTML = `${item.name}-${i+1}`;
+                                    }
+                                    console.log(grid.getGrids());
                                 }
-                        </script>
-                </head>
+                            })
+                        })
+                        .catch(error => {
+                            alert('Error:', error)
+                            console.log(error)
+                        })
+                }
+            </script>
+        </head>
 
-                <h1>应用中心</h1>
+        <h1>应用中心</h1>
 
-                <body>
-                        <div><br><br><br><br><br></div>
-                </body>
+        <body>
 
-        </section>
+            <div class="grid">
+
+            </div>
+
+            <div><br><br><br><br><br></div>
+        </body>
+
+    </section>
 
 </template>
