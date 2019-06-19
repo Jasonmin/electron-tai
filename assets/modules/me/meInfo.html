@@ -13,7 +13,6 @@
             <script>
 
                 request_userinfo()
-
                 function request_userinfo() {
 
                     var cacheString = localStorage.getItem('loginModel')
@@ -37,6 +36,9 @@
 
                                 let userData = obj.data;
                                 configUserInfoUI(userData);
+                                // request_getAppMenus();
+
+                                // abc()
                             })
                         })
                         .catch(error => {

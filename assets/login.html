@@ -21,7 +21,7 @@
 
                 var value = global.value
                 console.log(value)
-            
+
 
                 function loginAction() {
                     var url = `${globalConfig.BaseUrl}/auth/jwt/login`;
@@ -40,6 +40,8 @@
                             res.json().then(function (obj) {
                                 alert(`hehe:${JSON.stringify(obj)}`)
                                 localStorage.setItem('loginModel', JSON.stringify(obj));
+
+                                // request_getAppMenus()
                             })
                         })
                         .catch(error => {
@@ -47,6 +49,32 @@
                             console.log(error)
                         })
                 }
+
+                // function request_getAppMenus() {
+                //     var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
+                //     fetch(url, {
+                //         method: "POST",
+                //         headers: {
+                //             'content-type': 'application/json',
+                //             // 'authorization': token,
+                //         }, body: JSON.stringify({
+                //             token = "CB2274245D179C276D1B26054F1E4EC5",
+                //             userName = "taiji"
+                //         }),
+                //     })
+                //         .then(res => {
+                //             res.json().then(function (obj) {
+                //                 alert(`userinfo:${JSON.stringify(obj)}`)
+
+                //                 // let userData = obj.data;
+                //                 // configUserInfoUI(userData);
+                //             })
+                //         })
+                //         .catch(error => {
+                //             alert('Error:', error)
+                //             console.log(error)
+                //         })
+                // }
             </script>
         </head>
 
@@ -60,22 +88,9 @@
             <br>
             <br>
             <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
-            <button type="button" class="btn btn-danger btn-block login-button" onclick="nextAction()">Next</button>
 
             <div id="demo "></div>
             <div class="login-version ">V3.0</div>
-
-            <!-- <script type="module">
-                import { Test } from './test.js'
-                var test = new Test()
-                test.test_log()
-            </script> -->
-
-            <!-- <script>
-            var baseUrl = globalConfig.BaseUrl
-                console.log(baseUrl)
-            </script> -->
-
         </body>
 
     </section>

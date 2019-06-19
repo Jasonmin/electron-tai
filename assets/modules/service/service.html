@@ -1,8 +1,39 @@
 <template class="task-template">
-
         <section id="service-section" class="section js-section u-category-system">
 
                 <head>
+                        <meta charset="UTF-8">
+                        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+                        <link rel="stylesheet"
+                                href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+                        <script>
+                                request_getAppMenus()
+                                function request_getAppMenus() {
+                                        var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
+
+                                        fetch(url, {
+                                                method: "POST",
+                                                headers: {
+                                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                                },
+                                                body: `token=CB2274245D179C276D1B26054F1E4EC5&userName=taiji`
+                                        })
+                                                .then(res => {
+                                                        res.json().then(function (obj) {
+                                                                console.log(JSON.stringify(obj))
+                                                                if (obj.code == 0) {
+                                                                        var menus = obj.data;
+                                                                        console.log(menus)
+                                                                }
+                                                        })
+                                                })
+                                                .catch(error => {
+                                                        alert('Error:', error)
+                                                        console.log(error)
+                                                })
+                                }
+                        </script>
                 </head>
 
                 <h1>应用中心</h1>
