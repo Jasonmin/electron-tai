@@ -25,21 +25,42 @@
                                     console.log(menus)
 
                                     let colCount = 4;
-                                    let rowCount = menus.length/colCount;
+                                    let rowCount = menus.length / colCount;
 
                                     let grid = new Grid({
                                         container: document.getElementsByClassName('grid')[0],// 必须项
                                         colCount: colCount,
                                         rowCount: rowCount,
                                         width: 600,
-                                        height: 150*rowCount,
+                                        height: 150 * rowCount,
                                     });
                                     // grid.setGridStyleByIndex(0, { "background": "red" });
                                     let grids = grid.getGrids();
                                     for (let i = 0; i < menus.length; i++) {
                                         let item = menus[i]
+                                        let aGrid = grids[i]
 
-                                        grids[i].innerHTML = `${item.name}-${i+1}`;
+                                        // aGrid.innerHTML = `${item.name}-${i+1}`;
+
+                                        let br1 = document.createElement('br')
+                                        aGrid.appendChild(br1)
+                                        let br10 = document.createElement('br')
+                                        aGrid.appendChild(br10)
+
+                                        let img = document.createElement('img')
+                                        img.src = item.icon
+                                        img.width = 60
+                                        img.height = 60
+                                        aGrid.appendChild(img)
+
+                                        let br2 = document.createElement('br')
+                                        aGrid.appendChild(br2)
+
+                                        let a = document.createElement('a');
+                                        a.innerHTML = item.name
+                                        a.href = `${item.url}?username=taiji`
+                                        a.class = 'u-visible-to-screen-reader'
+                                        aGrid.appendChild(a)
                                     }
                                     console.log(grid.getGrids());
                                 }
@@ -58,9 +79,7 @@
         <body>
 
             <div class="grid">
-
             </div>
-
             <div><br><br><br><br><br></div>
         </body>
 

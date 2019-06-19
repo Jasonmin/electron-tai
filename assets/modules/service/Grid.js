@@ -90,7 +90,7 @@ class Grid{
     _setContainerStyle(){
         this.container.style.width = this.width + "px";
         this.container.style.height = this.height + "px";
-        this.container.style.border = '1px solid black';
+        // this.container.style.border = '1px solid black';
         this.container.style.display = 'grid';
         this.container.style.gridTemplateColumns = this._generateFlStr(this.colCount);
         this.container.style.gridTemplateRows = this._generateFlStr(this.rowCount);
@@ -103,7 +103,7 @@ class Grid{
     _setGridBorder(){
         let items = this.getGrids();
         for(let i = 0 ; i< items.length; i++){
-            items[i].style.border = '1px solid black';
+            // items[i].style.border = '1px solid black';
         }
     }
     
