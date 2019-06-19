@@ -23,7 +23,7 @@
                     var userId = userModel.id;
 
 
-                    var url = `https://124.204.65.86:14430/api/admin/userapi/${userId}`;
+                    var url = `${globalConfig.BaseUrl}/admin/userapi/${userId}`;
                     fetch(url, {
                         method: "GET",
                         headers: {
@@ -104,6 +104,7 @@
                     </tr>
                 </tbody>
             </table>
+
         </body>
 
     </section>

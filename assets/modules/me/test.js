@@ -1,0 +1,1 @@
+var cc = 'test cc'
