@@ -4,7 +4,7 @@ const { app, BrowserWindow } = require('electron')
 const glob = require('glob')
 const path = require('path')
 const Store = require('./utils/stores/store')
-const {localStorage} = require('electron-browser-storage');
+const { localStorage } = require('electron-browser-storage');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -18,7 +18,7 @@ const store = new Store({
             width: 800,
             height: 600,
             x: 0,
-            y: 0
+            y: 0,
         }
     }
 });
@@ -28,7 +28,7 @@ function initialize() {
     loadDemos()
 
     global.value = "啦啦啦啦"
-    
+
 }
 
 function createWindow() {
@@ -56,6 +56,9 @@ function createWindow() {
     mainWindow.on('resize', saveWindowsBounds);
     mainWindow.on('move', saveWindowsBounds);
 
+    mainWindow.setMinimumSize(800,600);
+    // mainWindow.setMaximumSize(1200,800);
+
     // and load the index.html of the app.
     mainWindow.loadFile('./index.html')
     // mainWindow.loadFile('./assets/login.html')
@@ -71,10 +74,10 @@ function createWindow() {
         mainWindow = null
     })
 
-    async function getLoginModel(){
+    async function getLoginModel() {
         return localStorage.getItem('loginModel');
     }
-    getLoginModel().then((obj)=> {
+    getLoginModel().then((obj) => {
         global.loginModel = obj
     })
 

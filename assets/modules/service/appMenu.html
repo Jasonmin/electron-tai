@@ -7,15 +7,19 @@
 
             <script>
                 request_getAppMenus()
+
                 function request_getAppMenus() {
                     var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
+                    let userName = `taiji`
+
+                    let token = getWebTokenWithUserName(userName);
 
                     fetch(url, {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        body: `token=CB2274245D179C276D1B26054F1E4EC5&userName=taiji`
+                        body: `token=${token}&userName=${userName}`
                     })
                         .then(res => {
                             res.json().then(function (obj) {
