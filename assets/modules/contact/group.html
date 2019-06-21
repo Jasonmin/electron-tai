@@ -1,0 +1,40 @@
+<template class="task-template">
+    <section id="group-section" class="section js-section u-category-system">
+
+        <head>
+            <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
+            <!-- <script src="https://libs.baidu.com/jquery/1.3.2/jquery.min.js"></script> -->
+            <!-- <script src="../../lib/jquery2.0.3.js"></script> -->
+            <script>
+                $(document).ready(function () {
+                    $("p").click(function () {
+                        $(this).hide();
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("button").click(function() {
+                        console.log('hehe')
+                    })
+
+                    $("#lala").click(function() {
+                        console.log('lala')
+                    })
+                });
+
+                $(document).ready(function () {
+                    
+                });
+
+            </script>
+        </head>
+        <h1>群组</h1>
+
+        <body>
+            <p>如果你点我，我就会消失。</p>
+            <p>继续点我!</p>
+            <p>接着点我!</p>
+            <button type="button" id="lala" class="btn btn-primary btn-block">登录</button>
+        </body>
+    </section>
+</template>

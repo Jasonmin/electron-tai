@@ -1,0 +1,53 @@
+<template class="task-template">
+    <section id="contact-section" class="section js-section u-category-system">
+
+        <head>
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js"></script> -->
+            
+        </head>
+        <h1>在线通讯录</h1>
+
+        <body>
+            <div id="container">
+                <ul>
+                    <li>Root node
+                        <ul>
+                            <li>Child node 1</li>
+                            <li>Child node 2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <script>
+                    request_department()
+                    function request_department() {
+                        var url = `${globalConfig.BaseUrl}/admin/groupapi/get/${-1}`;
+                        var cacheString = localStorage.getItem('loginModel')
+                        var obj = JSON.parse(cacheString);
+                        var userModel = obj.data;
+                        var token = userModel.authtoken
+                        fetch(url, {
+                            method: "GET",
+                            headers: {
+                                'content-type': 'application/json',
+                                'authorization': token,
+                            }
+                        })
+                            .then(res => {
+                                res.json().then(function (obj) {
+                                    // alert(`hehe:${JSON.stringify(obj)}`)
+                                })
+                            })
+                            .catch(error => {
+                                alert('Error:', error)
+                                console.log(error)
+                            })
+                    }
+                </script>
+        </body>
+
+    </section>
+</template>
