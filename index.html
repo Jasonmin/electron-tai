@@ -13,12 +13,14 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/global.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/section.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="./assets/modules/service/browser/browser.css">
 
 
     <link rel="import" href="./assets/login.html">
     <link rel="import" href="./assets/modules/me/meInfo.html">
     <link rel="import" href="./assets/modules/me/setting.html">
     <link rel="import" href="./assets/modules/service/appMenu.html">
+    <link rel="import" href="./assets/modules/service/browser/browser.html">
     <link rel="import" href="./assets/modules/contact/contact.html">
     <link rel="import" href="./assets/modules/contact/group.html">
     <title>南昌全媒体大脑</title>
@@ -26,6 +28,7 @@
     <script src="./static/config.js"></script>
     <script src="./utils/util.js"></script>
     <script src="./assets/modules/service/Grid.js"></script>
+    <script src="./assets/modules/service/browser/browser.js"></script>
 
     <!-- <script src="./assets/lib/jquery.js"></script> -->
     <!-- <script src="./assets/lib/bootstrap-treeview.css"></script> -->
@@ -49,7 +52,7 @@
     </style>
 </head>
 
-<body>
+<body class="loading">
 
 
 
@@ -77,6 +80,7 @@
                 </svg> 应用中心
             </h5>
             <button type="button" id="button-appMenu" data-section="appMenu" class="nav-button">Web应用中心</button>
+            <button type="button" id="button-browser" data-section="browser" class="nav-button">浏览器</button>
         </div>
 
         <div class="nav-item u-category-windows">

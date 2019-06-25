@@ -47,6 +47,7 @@ function createWindow() {
     }
 
     mainWindow = new BrowserWindow(config);
+    // mainWindow = new BrowserWindow({width: 1024, height: 768 });
 
     function saveWindowsBounds() {
         // store.get('windowBounds',mainWindow.get
@@ -62,9 +63,12 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadFile('./index.html')
     // mainWindow.loadFile('./assets/login.html')
+    // mainWindow.loadURL('file://'+__dirname +'/assets/modules/service/browser/browser.html')
+    // mainWindow.loadURL('file://'+__dirname +'/browser/browser.html')
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
+    // mainWindow.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
