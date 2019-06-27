@@ -18,7 +18,7 @@ function handleSectionTrigger(event) {
 
     // Display the current section
     const sectionId = `${event.target.dataset.section}-section`
-    console.log(`sectionid:${sectionId}`);
+    console.log(`cursectionid:${sectionId}`);
     var item = document.getElementById(sectionId)
     item.classList.add('is-shown')
         // document.getElementById(sectionId).classList.add('is-shown')

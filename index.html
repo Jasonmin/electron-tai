@@ -4,9 +4,6 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
-    <!-- <script src="https://libs.baidu.com/jquery/1.3.2/jquery.min.js"></script> -->
-
     <link rel="stylesheet" type="text/css" href="./assets/css/login.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/nav.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/variables.css">
@@ -23,42 +20,28 @@
     <link rel="import" href="./assets/modules/service/browser/browser.html">
     <link rel="import" href="./assets/modules/contact/contact.html">
     <link rel="import" href="./assets/modules/contact/group.html">
-    <title>南昌全媒体大脑</title>
+
+    <title id="title1"> </title>
 
     <script src="./static/config.js"></script>
     <script src="./utils/util.js"></script>
     <script src="./assets/modules/service/Grid.js"></script>
     <script src="./assets/modules/service/browser/browser.js"></script>
 
-    <!-- <script src="./assets/lib/jquery.js"></script> -->
-    <!-- <script src="./assets/lib/bootstrap-treeview.css"></script> -->
-    <!-- <script src="./assets/lib/bootstrap-treeview.js"></script> -->
-    <!-- <script src="./assets/lib/LuTree.js"></script> -->
-
-    <!-- <script src="./assets/lib/jstree-style3_3_8.min.css"></script>
-    <script src="./assets/lib/jquery3_1_1.min.js"></script>
-    <script src="./assets/lib/jstree3_8_8.min.js"></script> -->
-    <!-- <script src="./assets/lib/jquery.js"></script> -->
-    <!-- <script src="./assets/lib/jquery1.3.2.min.js"></script> -->
-
     <script src="./assets/lib/jquery2.0.3.js"></script>
 
-    
-
     <style type="text/css">
-        h2 {
+        /* h2 {
             color: red;
-        }
+        } */
     </style>
 </head>
 
 <body class="loading">
 
-
-
     <nav class="nav js-nav nav.is-shown">
         <header class="nav-header">
-            <h2>南昌全媒体大脑</h2>
+            <h2 id="h2"> </h2>
         </header>
 
         <div class="nav-item u-category-windows">
@@ -67,7 +50,7 @@
                     <use xlink:href="assets/img/icons.svg#icon-windows"></use>
                 </svg> 通讯录
             </h5>
-            <!-- <button type="button" id="button-meInfo" data-section="meInfo" class="nav-button">个人信息</button> -->
+            
             <button type="button" id="button-login" data-section="login" class="nav-button">登录</button></em>
             <button type="button" id="button-contact" data-section="contact" class="nav-button">在线通讯录</button>
             <button type="button" id="button-group" data-section="group" class="nav-button">群组</em></button>
@@ -96,7 +79,6 @@
         </div>
 
     </nav>
-
     <main class="content js-content">
     </main>
 
@@ -105,6 +87,14 @@
         require('./renderer.js')
         require('./assets/imports')
         require('./assets/nav')
+
+        // set title
+        var title = document.getElementById('title1')
+        title.innerHTML = `${globalConfig.cnName}`
+
+        var navHeader = document.getElementById('h2')
+        navHeader.innerHTML = `${globalConfig.cnName}`
+
     </script>
 </body>
 

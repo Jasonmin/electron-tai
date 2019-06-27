@@ -2,51 +2,215 @@
     <section id="contact-section" class="section js-section u-category-system">
 
         <head>
-            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css" />
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js"></script> -->
-            
+            <title>JS无级树树形菜单</title>
+            <style type="text/css">
+                .menuTree {
+                    margin-left: 0px;
+                }
+
+                .menuTree div {
+                    padding-left: 1px;
+                }
+
+                .menuTree div ul {
+                    overflow: hidden;
+                    display: none;
+                    height: auto;
+                    margin: 0;
+                }
+
+                .menuTree span {
+                    display: block;
+                    height: 20px;
+                    line-height: 25px;
+                    padding-left: 5px;
+                    margin: 1px 0;
+                    cursor: pointer;
+                    border-bottom: 1px solid #CCC;
+                }
+
+                .menuTree span:hover {
+                    background-color: #e6e6e6;
+                    color: #cf0404;
+                }
+
+                .menuTree a {
+                    color: #333;
+                    text-decoration: none;
+                }
+
+                .menuTree a:hover {
+                    color: #06F;
+                }
+
+                .menuTree span {
+                    height: 50px;
+                }
+            </style>
         </head>
         <h1>在线通讯录</h1>
 
         <body>
-            <div id="container">
-                <ul>
-                    <li>Root node
-                        <ul>
-                            <li>Child node 1</li>
-                            <li>Child node 2</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            
+            <div id="menuTree" class="menuTree"></div>
             <script>
-                    // request_department()
-                    function request_department() {
-                        var url = `${globalConfig.BaseUrl}/admin/groupapi/get/${-1}`;
-                        var cacheString = localStorage.getItem('loginModel')
-                        var obj = JSON.parse(cacheString);
-                        var userModel = obj.data;
-                        var token = userModel.authtoken
-                        fetch(url, {
-                            method: "GET",
-                            headers: {
-                                'content-type': 'application/json',
-                                'authorization': token,
-                            }
-                        })
-                            .then(res => {
-                                res.json().then(function (obj) {
-                                    // alert(`hehe:${JSON.stringify(obj)}`)
-                                })
-                            })
-                            .catch(error => {
-                                alert('Error:', error)
-                                console.log(error)
-                            })
+                var request_department = async function (id) {
+                    console.log('request_department')
+                    var url = `${globalConfig.BaseUrl}/admin/groupapi/get/${id}`;
+                    var cacheString = localStorage.getItem('loginModel')
+                    var obj = JSON.parse(cacheString);
+                    var userModel = obj.data;
+                    var token = userModel.authtoken
+                    var response
+                    await fetch(url, {
+                        method: "GET",
+                        headers: {
+                            'content-type': 'application/json',
+                            'authorization': token,
+                        }
+                    }).then(res => {
+                        response = res.json()
+                    }).catch(error => {
+                        response = error
+                    })
+                    return response
+                }
+
+                var request_userOfDepartment = async function (id) {
+                    console.log('request_department')
+                    var url = `${globalConfig.BaseUrl}/admin/userapi/get/${id}`;
+                    var cacheString = localStorage.getItem('loginModel')
+                    var obj = JSON.parse(cacheString);
+                    var userModel = obj.data;
+                    var token = userModel.authtoken
+                    var response
+                    await fetch(url, {
+                        method: "GET",
+                        headers: {
+                            'content-type': 'application/json',
+                            'authorization': token,
+                        }
+                    }).then(res => {
+                        response = res.json()
+                    }).catch(error => {
+                        response = error
+                    })
+                    return response
+                }
+
+                let id = -1
+                let res = request_department(id)
+                res.then(obj => {
+                    if (obj.status == 200) {
+                        let dataList = obj.data;
+                        console.log(`datalist${JSON.stringify(dataList)}`)
+                        document.getElementById("menuTree").innerHTML = forTree(dataList);
+                        addClickEvent($("#menuTree").find("div span"))
                     }
-                </script>
+                })
+
+                function addClickEvent(target) {
+                    target.click(function () {
+                        console.log(`${this.id}::${this.dataset.hasChild}`)
+                        if (this.dataset.hasChild == `true`) {
+                            if (this.dataset.hasLoad == `false`) {
+                                let childRes = request_department(this.id)
+                                childRes.then(obj => {
+                                    if (obj.status == 200) {
+                                        let dataList = obj.data;
+                                        this.dataset.hasLoad = 'true'
+                                        console.log(`datalist${JSON.stringify(dataList)}`)
+                                        var childHtml = forTree(dataList)
+                                        console.log(`childHtml:${childHtml}`)
+                                        var ul = document.getElementById(`${this.id}ul`)
+                                        ul.innerHTML = childHtml
+                                        console.log(`ul:${ul}`)
+
+                                        ulExpand(this)
+                                        addClickEvent($(`#${this.id}ul`).find("div span"))
+                                    }
+                                })
+                            } else {
+                                ulExpand(this)
+                            }
+                        } else {
+                            if (this.dataset.hasLoad == `false`) {
+                                let childRes = request_userOfDepartment(this.id)
+                                childRes.then(obj => {
+                                    if (obj.status == 200) {
+                                        let dataList = obj.data;
+                                        this.dataset.hasLoad = 'true'
+                                        console.log(`datalist${JSON.stringify(dataList)}`)
+                                        var childHtml = forTree(dataList)
+                                        console.log(`childHtml:${childHtml}`)
+                                        var ul = document.getElementById(`${this.id}ul`)
+                                        ul.innerHTML = childHtml
+                                        console.log(`ul:${ul}`)
+
+                                        ulExpand(this)
+                                        addClickEvent($(`#${this.id}ul`).find("div span"))
+                                    }
+                                })
+                            } else {
+                                ulExpand(this)
+                            }
+                        }
+                    })
+                }
+                function ulExpand(target) {
+                    let jul = $(target).siblings("ul")
+                    if (jul.find("div").html() != null) {
+                        if (jul.css("display") == "none") {
+                            jul.show(300);
+                        } else {
+                            jul.hide(300);
+                        }
+                    }
+                }
+
+                /*递归实现获取无级树数据并生成DOM结构*/
+                var forTree = function (o) {
+                    var str = "";
+                    for (var i = 0; i < o.length; i++) {
+                        var urlstr = "";
+                        try {
+                            urlstr = `<div><span id='${o[i].id}' data-has-load=${false} data-has-child=${o[i].hasChild}>${o[i].name}</span><ul id='${o[i].id}ul'>`;
+                            str += urlstr;
+                            str += "</ul></div>";
+                        } catch (e) { }
+                    }
+                    return str;
+                }
+
+                /*树形菜单*/
+                // var menuTree = function () {
+                //     //给有子对象的元素加
+                //     $("#menuTree ul").each(function (index, element) {
+                //         console.log(`menuTree ul ${element}`)
+                //         var ulContent = $(element).html();
+                //         var spanContent = $(element).siblings("span").html();
+                //         if (ulContent) {
+                //             $(element).siblings("span").html(spanContent)
+                //         }
+                //     });
+
+                //     $("#menuTree").find("div span").click(function () {
+                //         console.log('action')
+                //         var ul = $(this).siblings("ul");
+                //         var spanStr = $(this).html();
+                //         var spanContent = spanStr.substr(3, spanStr.length);
+                //         if (ul.find("div").html() != null) {
+                //             if (ul.css("display") == "none") {
+                //                 ul.show(300);
+                //                 // $(this).html("[-]" + spanContent);
+                //             } else {
+                //                 ul.hide(300);
+                //                 // $(this).html("[+] " + spanContent);
+                //             }
+                //         }
+                //     })
+                // }()
+
+            </script>
         </body>
 
     </section>

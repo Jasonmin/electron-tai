@@ -9,6 +9,10 @@ function getWebTokenWithUserName(userName) {
     return (md5(codeStr)).toUpperCase()
 }
 
+function util_md5(inputStr) {
+    return (md5(inputStr).toUpperCase())
+}
+
 
 // 日期格式化
 Date.prototype.format = function(fmt) { 

@@ -4,6 +4,7 @@
     <section id="login-section" class="section js-section u-category-system">
 
         <head>
+            <h1 id="login_header">登录</h1>
             <meta charset="UTF-8">
             <!-- <script src="/assets/static/config.js"></script> -->
             <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -11,35 +12,32 @@
             <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
             <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
             <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
-
             <!-- <link rel="import" href="./test.html"> -->
 
             <script>
-
                 var data = window.localStorage.getItem('loginModel');
                 console.log(data);
 
                 var value = global.value
                 console.log(value)
-
-
                 function loginAction() {
                     var url = `${globalConfig.BaseUrl}/auth/jwt/login`;
+                    let pwd = util_md5(`${globalConfig.password}`);
                     console.log("request start")
+                    console.log(pwd)
                     fetch(url, {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify({
-                            username: "houxw",
-                            password: "E10ADC3949BA59ABBE56E057F20F883E"
+                            username: `${globalConfig.username}`,
+                            password: pwd
                         })
                     })
                         .then(res => {
                             // {type: "cors", url: "https://124.204.65.86:14430/api/auth/jwt/login", redirected: false, status: 502, ok: false, …}
-                            console.log(res.json())
-                            if(res) {
+                            if (res) {
                                 res.json().then(function (obj) {
                                     alert(`hehe:${JSON.stringify(obj)}`)
                                     localStorage.setItem('loginModel', JSON.stringify(obj));
@@ -52,12 +50,12 @@
                         })
                 }
 
-    
+
             </script>
         </head>
 
         <!-- <img class="login-logo img-rounded" src="./img/logo@2x.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x,"> -->
-        <div class="login-title">南昌全媒体大脑</div>
+        <!-- <div class="login-title" id="login_title_id">南昌全媒体大脑</div> -->
 
         <body>
             <input type="text" id="uname" class="lgoin-input form-control" placeholder="账号" name="username">
@@ -66,10 +64,18 @@
             <br>
             <br>
             <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
-
             <div id="demo "></div>
             <div class="login-version ">V3.0</div>
         </body>
+
+        <script>
+
+            // var loginTitle = document.getElementById('login_title_id')
+            // loginTitle.innerHTML = `${globalConfig.cnName}`
+
+            var h1Title = document.getElementById('login_header')
+            h1Title.innerHTML = `${globalConfig.cnName}`
+        </script>
 
     </section>
 

@@ -67,8 +67,8 @@ function createWindow() {
     // mainWindow.loadURL('file://'+__dirname +'/browser/browser.html')
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
-    // mainWindow.openDevTools();
+    // mainWindow.webContents.openDevTools()
+    mainWindow.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -92,7 +92,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
-app.setName("南昌全媒体大脑")
+// app.setName("南昌全媒体大脑")
 
 // 忽略https证书错误
 app.commandLine.appendSwitch('ignore-certificate-errors')
