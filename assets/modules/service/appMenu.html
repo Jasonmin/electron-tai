@@ -1,17 +1,24 @@
 <template class="task-template">
-    <section id="appMenu-section" class="section js-section u-category-system">
+    <section id="appMenu-section" data-loaded=false class="section js-section u-category-system">
 
         <head>
             <meta charset="UTF-8">
 
 
             <script>
-                request_getAppMenus()
 
-                function clickMenu() {
-                    
-                }
+                var e = document.getElementById('appMenu-section')
+                var observer = new MutationObserver(function (event) {
+                    let isShown = e.classList[3]
+                    if (isShown == 'is-shown' && e.dataset.loaded == "false") {
+                        request_getAppMenus()
+                    }
+                })
+                observer.observe(e, {
+                    attributeFilter: ['class']
+                })
 
+                // request_getAppMenus()
                 function request_getAppMenus() {
                     var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
                     let userName = `taiji`
@@ -29,6 +36,9 @@
                             console.log(`menu res:${res.url}`)
                             res.json().then(function (obj) {
                                 if (obj.code == 0) {
+                                    var e = document.getElementById('appMenu-section')
+                                    e.dataset.loaded = "true"
+
                                     var menus = obj.data;
                                     console.log(menus)
 
