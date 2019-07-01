@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<h1>个人详情</h1>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../../../static/config.js"></script>
+
+    <script>
+
+        request_userinfo()
+        function request_userinfo() {
+
+            var cacheString = localStorage.getItem('loginModel')
+            var obj = JSON.parse(cacheString);
+            var userModel = obj.data;
+            var token = userModel.authtoken
+            var userId = userModel.id;
+
+            var url = `${globalConfig.BaseUrl}/admin/userapi/${userId}`
+
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': token,
+                },
+            }).then(res => {
+                res.json().then(function (obj) {
+                    // alert(`userinfo:${JSON.stringify(obj)}`)
+                    let userData = obj.data;
+                    configUserInfoUI(userData);
+                })
+            }).catch(error => {
+                alert('Error:', error)
+                console.log(error)
+            })
+        }
+
+        function configUserInfoUI(userData) {
+            document.getElementById("username").innerHTML = userData.username
+            document.getElementById("department").innerHTML = userData.departmentName!=undefined?userData.departmentName:""
+            document.getElementById("name").innerHTML = userData.name!=undefined?userData.name:""
+        }
+    </script>
+
+</head>
+
+<body>
+    <div><br><br></div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>头像</td>
+                <td id="protrait"></td>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td id="name">候欣伟</td>
+            </tr>
+            <tr>
+                <td>账号</td>
+                <td id="username"></td>
+            </tr>
+            <tr>
+                <td>手机</td>
+                <td id="phone"></td>
+            </tr>
+            <tr>
+                <td>座机</td>
+                <td>188</td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>传真</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>职务</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>部门</td>
+                <td id="department"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button style="display:block;margin:0 auto" class="close-button" id="close-window"
+        onclick="javascript:window.close()">确定</button>
+
+</body>
+
+</html>
