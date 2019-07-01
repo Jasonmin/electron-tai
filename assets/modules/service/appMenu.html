@@ -7,6 +7,8 @@
 
             <script>
 
+                var isRequesting = false
+
                 var e = document.getElementById('appMenu-section')
                 var observer = new MutationObserver(function (event) {
                     let isShown = e.classList[3]
@@ -20,11 +22,17 @@
 
                 // request_getAppMenus()
                 function request_getAppMenus() {
+
+                    if (isRequesting) {
+                        return
+                    }
+
                     var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
                     let userName = `taiji`
 
                     let token = getWebTokenWithUserName(userName);
-
+                    
+                    isRequesting = true
                     fetch(url, {
                         method: "POST",
                         headers: {
