@@ -14,14 +14,14 @@
 
             <script>
 
+                var cacheString = localStorage.getItem('loginModel')
+                var obj = JSON.parse(cacheString);
+                var userModel = obj.data;
+                var token = userModel.authtoken
+                var userId = userModel.id;
+
                 request_userinfo()
                 function request_userinfo() {
-
-                    var cacheString = localStorage.getItem('loginModel')
-                    var obj = JSON.parse(cacheString);
-                    var userModel = obj.data;
-                    var token = userModel.authtoken
-                    var userId = userModel.id;
 
                     var url = `${globalConfig.BaseUrl}/admin/userapi/${userId}`;
                     fetch(url, {
@@ -30,21 +30,19 @@
                             'content-type': 'application/json',
                             'authorization': token,
                         },
-                    })
-                        .then(res => {
-                            res.json().then(function (obj) {
-                                // alert(`userinfo:${JSON.stringify(obj)}`)
-                                let userData = obj.data;
-                                configUserInfoUI(userData);
-                                // request_getAppMenus();
+                    }).then(res => {
+                        res.json().then(function (obj) {
+                            // alert(`userinfo:${JSON.stringify(obj)}`)
+                            let userData = obj.data;
+                            configUserInfoUI(userData);
+                            // request_getAppMenus();
 
-                                // abc()
-                            })
+                            // abc()
                         })
-                        .catch(error => {
-                            alert('Error:', error)
-                            console.log(error)
-                        })
+                    }).catch(error => {
+                        alert('Error:', error)
+                        console.log(error)
+                    })
                 }
 
                 function configUserInfoUI(userData) {
@@ -52,6 +50,29 @@
                     document.getElementById("department").innerHTML = userData.departmentName
                     document.getElementById("name").innerHTML = userData.name
                 }
+
+                function request_modefyPortrait() {
+
+                    var url = `${globalConfig.BaseUrl}/admin/userapi/profiles/${userId}`;
+                    const fd = new FormData()
+                    fetch(url, {
+                        method: "PUT",
+                        headers: {
+                            'content-type': 'application/json',
+                            'authorization': token,
+                        },
+                        body:fd
+                    }).then(res => {
+                        res.json().then(function (obj) {
+                            // alert(`userinfo:${JSON.stringify(obj)}`)
+                            let userData = obj.data;
+                        })
+                    }).catch(error => {
+                        alert('Error:', error)
+                        console.log(error)
+                    })
+                }
+
             </script>
 
             <script type="text/javascript">
@@ -108,6 +129,8 @@
             </table>
 
             <button class="demo-button" id="new-window">在新页面查看</button>
+            <br>
+            <button class="demo-button" id="select-directory">修改头像</button>
         </body>
     </section>
 
