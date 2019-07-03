@@ -7,6 +7,7 @@ document.body.addEventListener('click', (event) => {
         handleModalTrigger(event)
     } else if (event.target.classList.contains('modal-hide')) {
         hideAllModals()
+        hideLoginModal()
     }
 })
 
@@ -39,12 +40,22 @@ function showMainContent() {
 
 function handleModalTrigger(event) {
     hideAllModals()
+    console.log(`handleModalTrigger`)
     const modalId = `${event.target.dataset.modal}-modal`
+    console.log(modalId)
     document.getElementById(modalId).classList.add('is-shown')
 }
 
 function hideAllModals() {
     const modals = document.querySelectorAll('.modal.is-shown')
+    Array.prototype.forEach.call(modals, (modal) => {
+        modal.classList.remove('is-shown')
+    })
+    showMainContent()
+}
+
+function hideLoginModal() {
+    const modals = document.querySelectorAll('.login.is-shown')
     Array.prototype.forEach.call(modals, (modal) => {
         modal.classList.remove('is-shown')
     })
@@ -64,7 +75,8 @@ function hideAllSectionsAndDeselectButtons() {
 }
 
 function displayAbout() {
-    document.querySelector('#about-modal').classList.add('is-shown')
+    console.log(`displayAbout`)
+    document.querySelector('#login-modal').classList.add('is-shown')
 }
 
 // Default to the view that was active the last time the app was open

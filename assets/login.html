@@ -1,18 +1,14 @@
 <template class="task-template">
 
-    <!-- <section id="login-section" class="section"> -->
-    <section id="login-section" class="section js-section u-category-system">
+    <!-- <div id="login-modal" class="login-page section js-section u-category-system"> -->
+    <!-- <div id="login-modal" class="login section js-section u-category-system modal "> -->
+    <div id="login-modal" class="login section js-section u-category-system">
 
         <head>
             <h1 id="login_header">登录</h1>
             <meta charset="UTF-8">
-            <!-- <script src="/assets/static/config.js"></script> -->
             <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-            <!-- <link rel="stylesheet" type="text/css" href="./css/login.css"> -->
             <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-            <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-            <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
-            <!-- <link rel="import" href="./test.html"> -->
 
             <script>
                 var data = window.localStorage.getItem('loginModel');
@@ -66,6 +62,10 @@
             <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
             <div id="demo "></div>
             <div class="login-version ">V3.0</div>
+
+            <div class="rainbow-button-wrapper">
+                <button id="get-started" class="about-button modal-hide">Get Started</button>
+              </div>
         </body>
 
         <script>
@@ -77,6 +77,6 @@
             h1Title.innerHTML = `${globalConfig.cnName}`
         </script>
 
-    </section>
+    </div>
 
 </template>

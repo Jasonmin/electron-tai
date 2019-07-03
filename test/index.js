@@ -65,10 +65,10 @@ describe('demo app', function () {
       .browserWindow.getBounds().should.eventually.have.property('width').and.be.above(0)
       .browserWindow.getBounds().should.eventually.have.property('height').and.be.above(0)
       .browserWindow.getTitle().should.eventually.equal('Electron API Demos')
-      .waitForVisible('#about-modal').should.eventually.be.true
+      .waitForVisible('#login-modal').should.eventually.be.true
       .isVisible('.js-nav').should.eventually.be.false
       .click('button[id="get-started"]').pause(500)
-      .isVisible('#about-modal').should.eventually.be.false
+      .isVisible('#login-modal').should.eventually.be.false
       .isVisible('.js-nav').should.eventually.be.true
   })
 
