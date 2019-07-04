@@ -1,7 +1,5 @@
-<template class="task-template">
-
-    <!-- <div id="login-modal" class="login-page section js-section u-category-system"> -->
-    <!-- <div id="login-modal" class="login section js-section u-category-system modal "> -->
+<!DOCTYPE html>
+<html>
     <div id="login-modal" class="login section js-section u-category-system">
 
         <head>
@@ -30,33 +28,27 @@
                             username: `${globalConfig.username}`,
                             password: pwd
                         })
+                    }).then(res => {
+                        if (res) {
+                            res.json().then(function (obj) {
+                                alert(`hehe:${JSON.stringify(obj)}`)
+                                localStorage.setItem('loginModel', JSON.stringify(obj));
+                            })
+                        }
+                    }).catch(error => {
+                        alert('Error:', error)
+                        console.log(error)
                     })
-                        .then(res => {
-                            // {type: "cors", url: "https://124.204.65.86:14430/api/auth/jwt/login", redirected: false, status: 502, ok: false, …}
-                            if (res) {
-                                res.json().then(function (obj) {
-                                    alert(`hehe:${JSON.stringify(obj)}`)
-                                    localStorage.setItem('loginModel', JSON.stringify(obj));
-                                })
-                            }
-                        })
-                        .catch(error => {
-                            alert('Error:', error)
-                            console.log(error)
-                        })
                 }
-
-
             </script>
         </head>
 
-        <!-- <img class="login-logo img-rounded" src="./img/logo@2x.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x,"> -->
-        <!-- <div class="login-title" id="login_title_id">南昌全媒体大脑</div> -->
+        <img class="login-logo img-rounded" src="./assets/img/logo@2x.png" srcset="./assets/img/logo.png 1x,./assets/img/logo@2x.png 2x,">
 
         <body>
-            <input type="text" id="uname" class="lgoin-input form-control" placeholder="账号" name="username">
+            <input type="text" id="login-uname" class="lgoin-input form-control" placeholder="账号" name="username">
             <br>
-            <input type="password" id="pwd" class="lgoin-input form-control" placeholder="密码" name="password">
+            <input type="password" id="login-pwd" class="lgoin-input form-control" placeholder="密码" name="password">
             <br>
             <br>
             <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
@@ -65,18 +57,15 @@
 
             <div class="rainbow-button-wrapper">
                 <button id="get-started" class="about-button modal-hide">Get Started</button>
-              </div>
+            </div>
         </body>
 
         <script>
-
-            // var loginTitle = document.getElementById('login_title_id')
-            // loginTitle.innerHTML = `${globalConfig.cnName}`
-
-            var h1Title = document.getElementById('login_header')
-            h1Title.innerHTML = `${globalConfig.cnName}`
+            $('#login_header').html(globalConfig.cnName)
+            $('#login-uname').val(globalConfig.username)
+            $('#login-pwd').val(globalConfig.password)
         </script>
 
     </div>
 
-</template>
+</html>

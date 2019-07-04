@@ -8,9 +8,6 @@
             <meta charset="UTF-8">
             <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-            <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-
-            <!-- <script src="../../../renderer-process/create-window"></script> -->
 
             <script>
 
@@ -22,7 +19,6 @@
 
                 request_userinfo()
                 function request_userinfo() {
-
                     var url = `${globalConfig.BaseUrl}/admin/userapi/${userId}`;
                     fetch(url, {
                         method: "GET",
@@ -32,7 +28,7 @@
                         },
                     }).then(res => {
                         res.json().then(function (obj) {
-                            // alert(`userinfo:${JSON.stringify(obj)}`)
+                            console.log(`userinfo:${JSON.stringify(obj)}`)
                             let userData = obj.data;
                             configUserInfoUI(userData);
                             // request_getAppMenus();
@@ -46,32 +42,46 @@
                 }
 
                 function configUserInfoUI(userData) {
+                    console.log(`res imgurl:${userData.portraituri}`)
                     document.getElementById("username").innerHTML = userData.username
                     document.getElementById("department").innerHTML = userData.departmentName
                     document.getElementById("name").innerHTML = userData.name
+                    document.getElementById("user_image").src = userData.portraituri
                 }
 
-                function request_modefyPortrait() {
+                function request_modefyPortrait(file) {
+                    console.log(`request_modefyPortrait`)
+                    const fileData = new FormData()
+                    // fileData.append('profile', 'profile.jpg')
+                    fileData.append('profile', file)
 
                     var url = `${globalConfig.BaseUrl}/admin/userapi/profiles/${userId}`;
-                    const fd = new FormData()
                     fetch(url, {
                         method: "PUT",
                         headers: {
-                            'content-type': 'application/json',
+                            // 'content-type': 'application/json',
                             'authorization': token,
                         },
-                        body:fd
+                        body: fileData
                     }).then(res => {
                         res.json().then(function (obj) {
-                            // alert(`userinfo:${JSON.stringify(obj)}`)
-                            let userData = obj.data;
+                            let imgUrl = obj.data
+                            console.log(`res:${JSON.stringify(obj)}`)
+                            console.log(`res imgurl:${imgUrl}`)
+                            // let userData = obj.data;
+                            // document.getElementById(`user_image`).src = imgUrl
                         })
                     }).catch(error => {
                         alert('Error:', error)
                         console.log(error)
                     })
                 }
+
+                //jquery版
+                $('#filePicker').on('change', function () {
+                    var file = this.files[0];
+                    request_modefyPortrait(file)
+                });
 
             </script>
 
@@ -82,11 +92,22 @@
                 console.log(require('electron').remote.getGlobal('value'))
                 console.log(require('electron').remote.getGlobal('loginModel'))
 
+                $(document).ready(function () {
+                    $("#user_image").click(function () {
+                        // $(this).hide();
+                    });
+                });
+
             </script>
         </head>
 
         <body>
-            <div><br><br><br><br><br></div>
+            <div><br><br><br></div>
+            <img id="user_image" src="" width="80" height="80" onerror="this.src='./assets/img/logo@2x.png'">
+            <br>
+            <button class="demo-button" id="select-directory">修改头像(支持jpg,png,gif类型图片)</button>
+            <input type="file" name="file" id="filePicker" />
+            <br><br>
             <table class="table">
                 <tbody>
                     <tr>
@@ -130,7 +151,27 @@
 
             <button class="demo-button" id="new-window">在新页面查看</button>
             <br>
-            <button class="demo-button" id="select-directory">修改头像</button>
+
+            <div id="selected-file">选择的内容</div>
+            <div>分割线</div>
+            <div id="holder">
+                Drag your file here
+            </div>
+
+            <script>
+                document.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    for (const f of e.dataTransfer.files) {
+                        console.log('File(s) you dragged here: ', f.path)
+                    }
+                });
+                document.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            </script>
         </body>
     </section>
 

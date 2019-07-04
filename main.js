@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+const {ipcMain} = require('electron')
 
 const glob = require('glob')
 const path = require('path')
@@ -23,24 +24,8 @@ const store = new Store({
     }
 });
 
-function initialize() {
-
-    loadDemos()
-
-    global.value = "啦啦啦啦"
-
-}
-
 function createWindow() {
     // Create the browser window.
-    // mainWindow = new BrowserWindow({
-    //     width: 1600,
-    //     height: 800,
-    //     webPreferences: {
-    //         nodeIntegration: true
-    //     }
-    // })
-
     var config = store.get('windowBounds')
     config.webPreferences = {
         nodeIntegration: true
@@ -50,7 +35,6 @@ function createWindow() {
     // mainWindow = new BrowserWindow({width: 1024, height: 768 });
 
     function saveWindowsBounds() {
-        // store.get('windowBounds',mainWindow.get
         store.set('windowBounds', mainWindow.getBounds());
     }
 
@@ -61,8 +45,8 @@ function createWindow() {
     // mainWindow.setMaximumSize(1200,800);
 
     // and load the index.html of the app.
-    mainWindow.loadFile('./index.html')
-    // mainWindow.loadFile('./assets/login.html')
+    // mainWindow.loadFile('./index.html')
+    mainWindow.loadFile('./assets/login.html')
     // mainWindow.loadURL('file://'+__dirname +'/assets/modules/service/browser/browser.html')
     // mainWindow.loadURL('file://'+__dirname +'/browser/browser.html')
 
@@ -84,7 +68,6 @@ function createWindow() {
     getLoginModel().then((obj) => {
         global.loginModel = obj
     })
-
 }
 
 // This method will be called when Electron has finished
@@ -118,5 +101,3 @@ function loadDemos() {
     const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
     files.forEach((file) => { require(file) })
 }
-
-initialize()

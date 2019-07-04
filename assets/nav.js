@@ -46,6 +46,10 @@ function handleModalTrigger(event) {
     document.getElementById(modalId).classList.add('is-shown')
 }
 
+function handleModalTriggerWithModalId(modalId) {
+    document.getElementById(modalId).classList.add('is-shown')
+}
+
 function hideAllModals() {
     const modals = document.querySelectorAll('.modal.is-shown')
     Array.prototype.forEach.call(modals, (modal) => {
