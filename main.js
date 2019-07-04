@@ -109,3 +109,12 @@ function loadDemos() {
     const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
     files.forEach((file) => { require(file) })
 }
+
+ipcMain.on(`login-success`,(event) => {
+    async function getLoginModel() {
+        return localStorage.getItem('loginModel');
+    }
+    getLoginModel().then((obj) => {
+        loadTargetPage(obj)
+    })
+})

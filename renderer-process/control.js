@@ -1,9 +1,9 @@
 const {ipcRenderer} = require('electron')
 
-// var loginStatus = checkLoginStatus()
-// if (!loginStatus) {
-//     document.getElementById(`login-modal`).classList.add('is-shown')
-// }
+function sendLoginSuccessNotification() {
+    console.log(`sendLoginSuccessNotification`)
+    ipcRenderer.send('login-success')
+}
 
 // ========================================================================
 function checkLoginStatus() {

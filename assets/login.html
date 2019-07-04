@@ -13,6 +13,7 @@
         <script src="../static/config.js"></script>
         <script src="../assets/lib/jquery2.0.3.js"></script>
         <script src="../utils/util.js"></script>
+        <script src="../renderer-process/control.js"></script>
 
         <script>
             var data = window.localStorage.getItem('loginModel');
@@ -34,11 +35,14 @@
                         username: `${globalConfig.username}`,
                         password: pwd
                     })
+
                 }).then(res => {
                     if (res) {
                         res.json().then(function (obj) {
-                            alert(`hehe:${JSON.stringify(obj)}`)
+                            // alert(`hehe:${JSON.stringify(obj)}`)
                             localStorage.setItem('loginModel', JSON.stringify(obj));
+
+                            sendLoginSuccessNotification()
                         })
                     }
                 }).catch(error => {
