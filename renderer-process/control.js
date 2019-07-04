@@ -1,11 +1,9 @@
 const {ipcRenderer} = require('electron')
 
-var loginStatus = checkLoginStatus()
-if (!loginStatus) {
-    document.getElementById(`login-modal`).classList.add('is-shown')
-}
-
-
+// var loginStatus = checkLoginStatus()
+// if (!loginStatus) {
+//     document.getElementById(`login-modal`).classList.add('is-shown')
+// }
 
 // ========================================================================
 function checkLoginStatus() {

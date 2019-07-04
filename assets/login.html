@@ -1,71 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <div id="login-modal" class="login section js-section u-category-system">
 
-        <head>
-            <h1 id="login_header">登录</h1>
-            <meta charset="UTF-8">
-            <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-            <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="login-section u-category-native-ui is-shown">
 
-            <script>
-                var data = window.localStorage.getItem('loginModel');
-                console.log(data);
+    <head>
+        <meta charset="UTF-8">
+        <h1 id="login_header"></h1>
 
-                var value = global.value
-                console.log(value)
-                function loginAction() {
-                    var url = `${globalConfig.BaseUrl}/auth/jwt/login`;
-                    let pwd = util_md5(`${globalConfig.password}`);
-                    console.log("request start")
-                    console.log(pwd)
-                    fetch(url, {
-                        method: "POST",
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            username: `${globalConfig.username}`,
-                            password: pwd
-                        })
-                    }).then(res => {
-                        if (res) {
-                            res.json().then(function (obj) {
-                                alert(`hehe:${JSON.stringify(obj)}`)
-                                localStorage.setItem('loginModel', JSON.stringify(obj));
-                            })
-                        }
-                    }).catch(error => {
-                        alert('Error:', error)
-                        console.log(error)
-                    })
-                }
-            </script>
-        </head>
+        <link rel="stylesheet" type="text/css" href="../assets/css/login.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <img class="login-logo img-rounded" src="./assets/img/logo@2x.png" srcset="./assets/img/logo.png 1x,./assets/img/logo@2x.png 2x,">
-
-        <body>
-            <input type="text" id="login-uname" class="lgoin-input form-control" placeholder="账号" name="username">
-            <br>
-            <input type="password" id="login-pwd" class="lgoin-input form-control" placeholder="密码" name="password">
-            <br>
-            <br>
-            <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
-            <div id="demo "></div>
-            <div class="login-version ">V3.0</div>
-
-            <div class="rainbow-button-wrapper">
-                <button id="get-started" class="about-button modal-hide">Get Started</button>
-            </div>
-        </body>
+        <script src="../static/config.js"></script>
+        <script src="../assets/lib/jquery2.0.3.js"></script>
+        <script src="../utils/util.js"></script>
 
         <script>
-            $('#login_header').html(globalConfig.cnName)
-            $('#login-uname').val(globalConfig.username)
-            $('#login-pwd').val(globalConfig.password)
-        </script>
+            var data = window.localStorage.getItem('loginModel');
+            console.log(data);
 
-    </div>
+            var value = global.value
+            console.log(value)
+            function loginAction() {
+                var url = `${globalConfig.BaseUrl}/auth/jwt/login`;
+                let pwd = util_md5(`${globalConfig.password}`);
+                console.log("request start")
+                console.log(pwd)
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: `${globalConfig.username}`,
+                        password: pwd
+                    })
+                }).then(res => {
+                    if (res) {
+                        res.json().then(function (obj) {
+                            alert(`hehe:${JSON.stringify(obj)}`)
+                            localStorage.setItem('loginModel', JSON.stringify(obj));
+                        })
+                    }
+                }).catch(error => {
+                    alert('Error:', error)
+                    console.log(error)
+                })
+            }
+        </script>
+    </head>
+
+
+    <body>
+
+        <img class="login-logo img-rounded" src="./img/logo@2x.png" srcset="./img/logo.png 1x,./img/logo@2x.png 2x,">
+        <input type="text" id="login-uname" class="lgoin-input form-control" placeholder="账号" name="username">
+        <br>
+        <input type="password" id="login-pwd" class="lgoin-input form-control" placeholder="密码" name="password">
+        <br>
+        <br>
+        <button type="button" class="btn btn-danger btn-block login-button" onclick="loginAction()">登录</button>
+        <div id="login-version" class="login-version">V3.0</div>
+        <!-- </div> -->
+        <!-- <div class="rainbow-button-wrapper"> -->
+        <!-- <button id="get-started" class="about-button modal-hide">Get Started</button> -->
+        <!-- </div> -->
+    </body>
+
+    <script>
+        $('#login_header').html(globalConfig.cnName)
+        $('#login-uname').val(globalConfig.username)
+        $('#login-pwd').val(globalConfig.password)
+        $('#login-version').html(globalConfig.version)
+    </script>
+
+</div>
 
 </html>

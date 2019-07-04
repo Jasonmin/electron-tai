@@ -3,8 +3,8 @@
 .section {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 20px;
+  right: 20px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;

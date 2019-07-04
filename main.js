@@ -45,8 +45,14 @@ function createWindow() {
     // mainWindow.setMaximumSize(1200,800);
 
     // and load the index.html of the app.
-    // mainWindow.loadFile('./index.html')
-    mainWindow.loadFile('./assets/login.html')
+    async function getLoginModel() {
+        return localStorage.getItem('loginModel');
+    }
+
+    getLoginModel().then((obj) => {
+        loadTargetPage(obj)
+    })
+    
     // mainWindow.loadURL('file://'+__dirname +'/assets/modules/service/browser/browser.html')
     // mainWindow.loadURL('file://'+__dirname +'/browser/browser.html')
 
@@ -61,13 +67,15 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
+}
 
-    async function getLoginModel() {
-        return localStorage.getItem('loginModel');
-    }
-    getLoginModel().then((obj) => {
+function loadTargetPage(loginData) {
+    if (loginData) {  // 已登录
+        mainWindow.loadFile('./index.html')
         global.loginModel = obj
-    })
+    } else {    // 未登录
+        mainWindow.loadFile('./assets/login.html')
+    }
 }
 
 // This method will be called when Electron has finished
