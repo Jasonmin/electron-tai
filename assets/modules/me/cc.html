@@ -1,0 +1,26 @@
+<template class="task-template">
+
+    <section id="setting-section" class="section js-section u-category-system">
+
+        <h1>设置</h1>
+
+        <head>
+            <script src="./renderer-process/control.js"></script>
+        </head>
+
+        <body>
+            <div><br><br><br><br><br></div>
+            <button type="button" class="btn btn-danger btn-block login-button" onclick="loginOut()">退出</button>
+        </body>
+
+        <script>
+            function loginOut() {
+                console.log(`login out`)
+                localStorage.removeItem('loginModel')
+                sendLoginChangeNotification()
+            }
+        </script>
+
+    </section>
+
+</template>

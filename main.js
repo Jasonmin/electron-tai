@@ -72,7 +72,7 @@ function createWindow() {
 function loadTargetPage(loginData) {
     if (loginData) {  // 已登录
         mainWindow.loadFile('./index.html')
-        global.loginModel = obj
+        global.loginModel = loginData
     } else {    // 未登录
         mainWindow.loadFile('./assets/login.html')
     }
@@ -110,7 +110,7 @@ function loadDemos() {
     files.forEach((file) => { require(file) })
 }
 
-ipcMain.on(`login-success`,(event) => {
+ipcMain.on(`login-change-success`,(event) => {
     async function getLoginModel() {
         return localStorage.getItem('loginModel');
     }

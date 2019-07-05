@@ -1,13 +1,13 @@
 const {ipcRenderer} = require('electron')
 
-function sendLoginSuccessNotification() {
+function sendLoginChangeNotification() {
     console.log(`sendLoginSuccessNotification`)
-    ipcRenderer.send('login-success')
+    ipcRenderer.send('login-change-success')
 }
 
 // ========================================================================
 function checkLoginStatus() {
-    var data = localStorage.getItem('loginModel3');
+    var data = localStorage.getItem('loginModel');
     if (data) {
         console.log(`==> login true`)
         return true

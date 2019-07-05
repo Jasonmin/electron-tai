@@ -42,7 +42,7 @@
                             // alert(`hehe:${JSON.stringify(obj)}`)
                             localStorage.setItem('loginModel', JSON.stringify(obj));
 
-                            sendLoginSuccessNotification()
+                            sendLoginChangeNotification()
                         })
                     }
                 }).catch(error => {
