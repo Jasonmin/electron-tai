@@ -52,18 +52,20 @@
 }
 
 .nav-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: bottom;
+    /* width: 20px;
+    height: 20px; */
+    vertical-align: text-bottom;
     margin-right: .25rem;
+    margin-left: .25rem;
 }
 
 .nav-category {
     margin: 0.1em 0px 10px 0px;
     text-align: left;
     padding-left: .1rem;
-    font-size: 15px;
-    font-weight: normal;
+    font-size: 17px;
+    font-weight: bold;
+    font-style: normal;
     /* text-transform: uppercase; */
 }
 
@@ -71,7 +73,7 @@
     display: block;
     width: 100%;
     padding: .3rem;
-    padding-left: calc(2rem + 16px + .5rem);
+    padding-left: calc(2rem + 16px + 1rem);
     /* padding + icon + magic */
     line-height: 2;
     text-align: left;
