@@ -11,6 +11,8 @@
         <body>
             <div><br><br><br><br><br></div>
             <button type="button" class="btn btn-danger btn-block login-button" onclick="loginOut()">退出</button>
+            <button id="test-loading" type="button" class="btn btn-danger btn-block login-button">show loading</button>
+            <button id="test-loading2" type="button" class="btn btn-danger btn-block login-button">dimiss loading</button>
         </body>
 
         <script>
@@ -19,6 +21,14 @@
                 localStorage.removeItem('loginModel')
                 sendLoginChangeNotification()
             }
+
+            $('#test-loading').click(function(){
+                $('#loading-svg').addClass('is-shown')
+            })
+
+            $('#test-loading2').click(function(){
+                $('#loading-svg').removeClass('is-shown')
+            })
         </script>
 
     </section>

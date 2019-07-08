@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/login.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/nav.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/about.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/variables.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/global.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/section.css">
@@ -52,7 +53,7 @@
                     <use xlink:href="assets/img/icons.svg#icon-windows"></use>
                 </svg> 通讯录
             </h5>
-            
+
             <!-- <button type="button" id="button-login" data-section="login" class="nav-button">登录</button></em> -->
             <button type="button" id="button-contact" data-section="contact" class="nav-button">在线通讯录</button>
             <button type="button" id="button-search" data-section="search" class="nav-button">通讯录搜索</button>
@@ -83,7 +84,23 @@
 
 
     </nav>
+
     <main class="content js-content">
+        <svg>
+            <use xlink:href="assets/img/loading.svg"></use>
+        </svg>
+        <svg class="loading-svg is-shown" xmlns="http://www.w3.org/2000/svg" style="display:block"></svg>
+
+        <!-- <img id="loading-svg" class="loading-svg is-shown" src="assets/img/loading.svg" fill="red" style="display:block" /> -->
+        <img id="loading-svg" class="loading-svg" src="assets/img/loading.svg" fill="red" style="display:block" />
+
+        <!-- <object type="image/svg+xml" class="loading-svg2 is-shown" data="assets/img/loading.svg" style="display:block">
+            <param name="src" value="assets/img/loading.svg">
+        </object> -->
+
+        <!-- <svg>
+            <use xlink:href="assets/img/icons.svg#icon-windows" fill="red"></use>
+        </svg> -->
     </main>
 
     <script>
@@ -101,7 +118,6 @@
 
         var navHeader = document.getElementById('h2')
         navHeader.innerHTML = `${globalConfig.cnName}`
-
     </script>
 </body>
 

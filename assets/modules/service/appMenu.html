@@ -60,13 +60,11 @@
                                         width: 600,
                                         height: 150 * rowCount,
                                     });
-                                    // grid.setGridStyleByIndex(0, { "background": "red" });
                                     let grids = grid.getGrids();
                                     for (let i = 0; i < menus.length; i++) {
                                         let item = menus[i]
                                         let aGrid = grids[i]
 
-                                        // aGrid.innerHTML = `${item.name}-${i+1}`;
 
                                         let br1 = document.createElement('br')
                                         aGrid.appendChild(br1)
@@ -104,7 +102,7 @@
 
         <body>
 
-            <div class="grid">
+            <div class="grid container">
             </div>
             <div><br><br><br><br><br></div>
         </body>

@@ -1,0 +1,50 @@
+/* 自定义样式 */
+
+.loading-svg {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    visibility: hidden;
+    transition: visibility 0s .12s linear, opacity .12s ease-in, transform .12s ease-in;
+}
+
+.loading-svg2 {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    visibility: hidden;
+    transition: visibility 0s .12s linear, opacity .12s ease-in, transform .12s ease-in;
+}
+
+.loading-svg.is-shown {
+    visibility: visible;
+    transition: visibility 0s 0s linear, opacity .36s ease-out, transform .36s ease-out;
+}
+
+.loading-svg2.is-shown {
+    visibility: visible;
+    transition: visibility 0s 0s linear, opacity .36s ease-out, transform .36s ease-out;
+}
+
+.webview-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 400;
+    height: 400;
+    margin: 0 auto;
+    background-color: aquamarine
+}
