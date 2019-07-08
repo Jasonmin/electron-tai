@@ -44,7 +44,7 @@
                 function configUserInfoUI(userData) {
                     console.log(`res imgurl:${userData.portraituri}`)
                     document.getElementById("username").innerHTML = userData.username
-                    document.getElementById("department").innerHTML = userData.departmentName
+                    document.getElementById("department").innerHTML = userData.departmentName?userData.departmentName:""
                     document.getElementById("name").innerHTML = userData.name
                     // document.getElementById("user_image").src = userData.portraituri
                 }
@@ -105,8 +105,9 @@
             <div><br><br><br></div>
             <img id="user_image" src="" width="80" height="80" onerror="this.src='./assets/img/logo@2x.png'">
             <br>
-            <button class="demo-button" id="select-directory">修改头像(支持jpg,png,gif类型图片)</button>
-            <input type="file" name="file" id="filePicker" />
+            <button class="demo-button" id="select-directory">修改头像</button>
+            <span class="demo-response" id="selected-file"></span>
+            <!-- <input type="file" name="file" id="filePicker" /> -->
             <br><br>
             <table class="table">
                 <tbody>
@@ -145,14 +146,14 @@
                 </tbody>
             </table>
 
-            <button class="demo-button" id="new-window">在新页面查看</button>
+            <!-- <button class="demo-button" id="new-window">在新页面查看</button>
             <br>
 
             <div id="selected-file">选择的内容</div>
             <div>分割线</div>
             <div id="holder">
                 Drag your file here
-            </div>
+            </div> -->
 
             <script>
                 document.addEventListener('drop', (e) => {

@@ -130,12 +130,12 @@ onload = function() {
         webview.addEventListener('findupdate', handleFindUpdate);
         window.addEventListener('keydown', handleKeyDown);
     } else {
-        var zoom = document.querySelector('#zoom');
-        var find = document.querySelector('#find');
-        zoom.style.visibility = "hidden";
-        zoom.style.position = "absolute";
-        find.style.visibility = "hidden";
-        find.style.position = "absolute";
+        // var zoom = document.querySelector('#zoom');
+        // var find = document.querySelector('#find');
+        // zoom.style.visibility = "hidden";
+        // zoom.style.position = "absolute";
+        // find.style.visibility = "hidden";
+        // find.style.position = "absolute";
     }
 };
 

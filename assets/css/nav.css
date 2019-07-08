@@ -86,8 +86,7 @@
     outline: none;
 }
 
-.nav-button:hover,
-.nav-button:focus:not(.is-selected) {
+.nav-button:hover .nav-button:focus:not(.is-selected) {
     background-color: hsla(0, 0%, 0%, .1);
 }
 

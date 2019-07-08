@@ -20,7 +20,17 @@
                     attributeFilter: ['class']
                 })
 
-                // request_getAppMenus()
+                function menuButtonClick() {
+                    console.log(`hehe a`)
+                    $('#app-menu-browser').addClass('is-shown')
+                    let ele = document.getElementById('app-webview')
+                    ele.setAttribute('src','http://218.23.218.22:8088/Creation/List?username=taiji')
+                }
+
+                $('app-img').click(function() {
+                    console.log(`hehe app-img`)
+                })
+                
                 function request_getAppMenus() {
 
                     if (isRequesting) {
@@ -69,21 +79,29 @@
                                         let br1 = document.createElement('br')
                                         aGrid.appendChild(br1)
                                         let br10 = document.createElement('br')
-                                        aGrid.appendChild(br10)
+                                        // aGrid.appendChild(br10)
 
                                         let img = document.createElement('img')
                                         img.src = item.icon
                                         img.width = 60
                                         img.height = 60
+                                        img.class = 'app-img'
+                                        img.setAttribute('data-url',item.url)
+                                        img.setAttribute('data-name',item.name)
+                                        img.setAttribute('onClick',"menuButtonClick()") 
                                         aGrid.appendChild(img)
 
                                         let br2 = document.createElement('br')
                                         aGrid.appendChild(br2)
 
-                                        let a = document.createElement('a');
+                                        let a = document.createElement('button');
                                         a.innerHTML = item.name
+                                        a.id='menu-button'
                                         a.href = `${item.url}?username=taiji`
                                         a.class = 'u-visible-to-screen-reader'
+                                        a.setAttribute('onClick',"menuButtonClick()") 
+                                        a.setAttribute('data-url',item.url)
+                                        a.setAttribute('data-name',item.name)
                                         aGrid.appendChild(a)
                                     }
                                     console.log(grid.getGrids());
@@ -95,6 +113,10 @@
                             console.log(error)
                         })
                 }
+
+                $('#browser-close').click(function() {
+                    $('#app-menu-browser').removeClass('is-shown')
+                })
             </script>
         </head>
 
@@ -104,7 +126,25 @@
 
             <div class="grid container">
             </div>
-            <div><br><br><br><br><br></div>
+            <div id="app-menu-browser" class="app-menu-browser is-shown">
+                <div id="controls" class="browser-control">
+            
+                    <button id="back" title="Go Back" disabled="true">&#9664;</button>
+                    <button id="forward" title="Go Forward" disabled="true">&#9654;</button>
+                    <button id="home" title="Go Home">&#8962;</button>
+                    <button id="browser-close" title="关闭">关闭</button>
+                    <button id="reload" title="Reload">&#10227;</button>
+              
+                    <form id="location-form">
+                      <div id="center-column">
+                        <input id="location" type="text" value="https://www.baidu.com/">
+                      </div>
+                      <input type="submit" value="Go">
+                    </form>
+              
+                  </div>
+                  <webview id="app-webview"  src="http://124.204.65.86:14423/static/app/ipas/wwj/wwj3.html"></webview>
+            </div>
         </body>
 
     </section>

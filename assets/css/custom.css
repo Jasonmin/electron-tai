@@ -48,3 +48,21 @@
     margin: 0 auto;
     background-color: aquamarine
 }
+
+.browser-control {
+    height: 60;
+}
+
+.app-menu-browser {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    background-color: aquamarine
+}
+
+.app-menu-browser.is-shown {
+    visibility: visible;
+}
