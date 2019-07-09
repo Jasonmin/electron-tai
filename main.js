@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
-const {ipcMain} = require('electron')
+const { ipcMain } = require('electron')
 
 const glob = require('glob')
 const path = require('path')
@@ -41,7 +41,7 @@ function createWindow() {
     mainWindow.on('resize', saveWindowsBounds);
     mainWindow.on('move', saveWindowsBounds);
 
-    mainWindow.setMinimumSize(800,600);
+    mainWindow.setMinimumSize(800, 600);
     // mainWindow.setMaximumSize(1200,800);
 
     // and load the index.html of the app.
@@ -52,7 +52,7 @@ function createWindow() {
     getLoginModel().then((obj) => {
         loadTargetPage(obj)
     })
-    
+
     // mainWindow.loadURL('file://'+__dirname +'/assets/modules/service/browser/browser.html')
     // mainWindow.loadURL('file://'+__dirname +'/browser/browser.html')
 
@@ -61,7 +61,7 @@ function createWindow() {
     mainWindow.openDevTools();
 
     // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
+    mainWindow.on('closed', function() {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
@@ -70,10 +70,11 @@ function createWindow() {
 }
 
 function loadTargetPage(loginData) {
-    if (loginData) {  // 已登录
+    if (loginData) { // 已登录
         mainWindow.loadFile('./index.html')
         global.loginModel = loginData
-    } else {    // 未登录
+        global.loginUser = (JSON.parse(loginData)).data;
+    } else { // 未登录
         mainWindow.loadFile('./assets/login.html')
     }
 }
@@ -89,13 +90,13 @@ app.on('ready', createWindow)
 app.commandLine.appendSwitch('ignore-certificate-errors')
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', function() {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') app.quit()
 })
 
-app.on('activate', function () {
+app.on('activate', function() {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) createWindow()
@@ -110,7 +111,7 @@ function loadDemos() {
     files.forEach((file) => { require(file) })
 }
 
-ipcMain.on(`login-change-success`,(event) => {
+ipcMain.on(`login-change-success`, (event) => {
     async function getLoginModel() {
         return localStorage.getItem('loginModel');
     }

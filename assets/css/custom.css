@@ -1,5 +1,8 @@
 /* 自定义样式 */
 
+
+/* Loading */
+
 .loading-svg {
     position: absolute;
     top: 45%;
@@ -19,16 +22,17 @@
     transition: visibility 0s 0s linear, opacity .36s ease-out, transform .36s ease-out;
 }
 
+
+/* WebView */
+
 .webview-wrapper {
+    display: flex;
     position: relative;
     top: 0;
     left: 0;
-    right: 0;
     bottom: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    background-color: aquamarine
+    right: 0;
+    background-color: rgb(245, 245, 245);
 }
 
 .browser-control {
@@ -46,4 +50,10 @@
 
 .app-menu-browser.is-shown {
     visibility: visible;
+}
+
+.app-title {
+    color: black;
+    position: relative;
+    left: 35%;
 }

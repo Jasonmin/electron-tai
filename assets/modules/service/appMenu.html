@@ -20,17 +20,19 @@
                     attributeFilter: ['class']
                 })
 
-                function menuButtonClick() {
-                    console.log(`hehe a`)
+                function menuButtonClick(item) {
+                    console.log(`==>${item.dataset.name},${item.dataset.url}`)
                     $('#app-menu-browser').addClass('is-shown')
-                    let ele = document.getElementById('app-webview')
-                    ele.setAttribute('src','http://218.23.218.22:8088/Creation/List?username=taiji')
+                    let webview = document.getElementById('app-webview')
+                    let loginUser = require('electron').remote.getGlobal('loginUser')
+                    webview.setAttribute('src',`${item.dataset.url}?username=${loginUser.username}`)
+                    $('#app-title').html(item.dataset.name)
                 }
 
-                $('app-img').click(function() {
+                $('app-img').click(function () {
                     console.log(`hehe app-img`)
                 })
-                
+
                 function request_getAppMenus() {
 
                     if (isRequesting) {
@@ -41,7 +43,7 @@
                     let userName = `taiji`
 
                     let token = getWebTokenWithUserName(userName);
-                    
+
                     isRequesting = true
                     fetch(url, {
                         method: "POST",
@@ -86,9 +88,9 @@
                                         img.width = 60
                                         img.height = 60
                                         img.class = 'app-img'
-                                        img.setAttribute('data-url',item.url)
-                                        img.setAttribute('data-name',item.name)
-                                        img.setAttribute('onClick',"menuButtonClick()") 
+                                        img.setAttribute('data-url', item.url)
+                                        img.setAttribute('data-name', item.name)
+                                        img.setAttribute('onClick', "menuButtonClick(this)")
                                         aGrid.appendChild(img)
 
                                         let br2 = document.createElement('br')
@@ -96,12 +98,12 @@
 
                                         let a = document.createElement('button');
                                         a.innerHTML = item.name
-                                        a.id='menu-button'
+                                        a.id = 'menu-button'
                                         a.href = `${item.url}?username=taiji`
                                         a.class = 'u-visible-to-screen-reader'
-                                        a.setAttribute('onClick',"menuButtonClick()") 
-                                        a.setAttribute('data-url',item.url)
-                                        a.setAttribute('data-name',item.name)
+                                        a.setAttribute('onClick', "menuButtonClick(this)")
+                                        a.setAttribute('data-url', item.url)
+                                        a.setAttribute('data-name', item.name)
                                         aGrid.appendChild(a)
                                     }
                                     console.log(grid.getGrids());
@@ -114,7 +116,9 @@
                         })
                 }
 
-                $('#browser-close').click(function() {
+                $('#browser-close').click(function () {
+                    let webview = document.getElementById('app-webview')
+                    webview.setAttribute('src', '')
                     $('#app-menu-browser').removeClass('is-shown')
                 })
             </script>
@@ -124,26 +128,17 @@
 
         <body>
 
-            <div class="grid container">
-            </div>
-            <div id="app-menu-browser" class="app-menu-browser is-shown">
+            <div class="grid container"></div>
+            <div id="app-menu-browser" class="app-menu-browser">
                 <div id="controls" class="browser-control">
-            
                     <button id="back" title="Go Back" disabled="true">&#9664;</button>
                     <button id="forward" title="Go Forward" disabled="true">&#9654;</button>
-                    <button id="home" title="Go Home">&#8962;</button>
                     <button id="browser-close" title="关闭">关闭</button>
-                    <button id="reload" title="Reload">&#10227;</button>
-              
-                    <form id="location-form">
-                      <div id="center-column">
-                        <input id="location" type="text" value="https://www.baidu.com/">
-                      </div>
-                      <input type="submit" value="Go">
-                    </form>
-              
-                  </div>
-                  <webview id="app-webview" class="webview-wrapper" src="http://124.204.65.86:14423/static/app/ipas/wwj/wwj3.html"></webview>
+                    <h4 id="app-title" class="app-title">标题</h4>
+                </div>
+                <div>
+                    <webview id="app-webview" class="webview-wrapper" src=""></webview>
+                </div>
             </div>
         </body>
 
