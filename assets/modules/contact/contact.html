@@ -26,7 +26,7 @@
                     padding-left: 5px;
                     margin: 1px 0;
                     cursor: pointer;
-                    border-bottom: 1px solid #CCC;
+                    /* border-bottom: 1px solid #CCC; */
                 }
 
                 .menuTree span:hover {
@@ -44,7 +44,8 @@
                 }
 
                 .menuTree span {
-                    height: 50px;
+                    height: 40px;
+                    width: 300px;
                 }
             </style>
         </head>
@@ -103,7 +104,7 @@
                     if (obj.status == 200) {
                         let dataList = obj.data;
                         console.log(`datalist${JSON.stringify(dataList)}`)
-                        document.getElementById("menuTree").innerHTML = forTree(dataList);
+                        document.getElementById("menuTree").innerHTML = forTree(dataList,1);
                         addClickEvent($("#menuTree").find("div span"))
                     }
                 })
@@ -119,7 +120,7 @@
                                         let dataList = obj.data;
                                         this.dataset.hasLoad = 'true'
                                         console.log(`datalist${JSON.stringify(dataList)}`)
-                                        var childHtml = forTree(dataList)
+                                        var childHtml = forTree(dataList,1)
                                         console.log(`childHtml:${childHtml}`)
                                         var ul = document.getElementById(`${this.id}ul`)
                                         ul.innerHTML = childHtml
@@ -140,7 +141,7 @@
                                         let dataList = obj.data;
                                         this.dataset.hasLoad = 'true'
                                         console.log(`datalist${JSON.stringify(dataList)}`)
-                                        var childHtml = forTree(dataList)
+                                        var childHtml = forTree(dataList,2)
                                         console.log(`childHtml:${childHtml}`)
                                         var ul = document.getElementById(`${this.id}ul`)
                                         ul.innerHTML = childHtml
@@ -168,12 +169,18 @@
                 }
 
                 /*递归实现获取无级树数据并生成DOM结构*/
-                var forTree = function (o) {
+                var forTree = function (o,imgType) {
+
+                    var imgName = 'apartment'
+                    if (imgType != 1) {
+                        imgName = 'chengyuan'
+                    }
+
                     var str = "";
                     for (var i = 0; i < o.length; i++) {
                         var urlstr = "";
                         try {
-                            urlstr = `<div><span id='${o[i].id}' data-has-load=${false} data-has-child=${o[i].hasChild}>${o[i].name}</span><ul id='${o[i].id}ul'>`;
+                            urlstr = `<div><span id='${o[i].id}' data-has-load=${false} data-has-child=${o[i].hasChild}> <img width='30' height='20' src="./assets/img/${imgName}.svg" />${o[i].name}</span><ul id='${o[i].id}ul'>`;
                             str += urlstr;
                             str += "</ul></div>";
                         } catch (e) { }

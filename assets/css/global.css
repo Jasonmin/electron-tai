@@ -154,6 +154,14 @@ kbd {
     opacity: 0;
 }
 
+.online-contact {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+}
+
 .content.is-shown {
     visibility: visible;
     ;
