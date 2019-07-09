@@ -11,12 +11,34 @@
 
                 function txtSearch() {
                     var txt = $("#txtSearch").val();
-                    console.log(txt)
-
+                    // console.log(txt)
+                    if (txt == "") {
+                        document.getElementById("contactSearchList").innerHTML = ""
+                        return;
+                    }
                     request_searchUser()
                 }
 
+                function clearInput() {
+                    $("#txtSearch").val("");
+                    document.getElementById("contactSearchList").innerHTML = ""
+                }
+                
+                // 监听输入值变化
+                $(function () {
+                    $('#txtSearch').bind('input propertychange', function () {
+                        // console.log(`change${$(this).val()}`)
+                        controller.abort()
+                        txtSearch()
+                    });
+                })
+
+                const controller = new AbortController()
+                const signal = controller.signal
+
                 function request_searchUser() {
+
+                    console.log(`request_searchUser`)
 
                     var cacheString = localStorage.getItem('loginModel')
                     var obj = JSON.parse(cacheString);
@@ -32,14 +54,15 @@
                             'authorization': token,
                         },
                         body: $("#txtSearch").val()
-                    }).then(res => {
+                    }, signal).then(res => {
                         res.json().then(function (obj) {
                             // console.log(`contact list:${JSON.stringify(obj.data)}`)
                             let dataList = obj.data
-
+                            if (dataList == undefined) {
+                                return;
+                            }
+                            
                             let str = contactForTree(dataList)
-                            // console.log(`str::${str}`)
-
                             document.getElementById("contactSearchList").innerHTML = str
                             addClickEvent($("#contactSearchList").find("div span"))
                         })
@@ -49,19 +72,14 @@
                     })
                 }
 
-                // function addClickEvent(target) { // 会影响在线通讯录的点击事件
-                //     target.click(function () {
-                //         // alert(`click ${this.innerHTML}`)
-                //     })
-                // }
-
                 /*递归实现获取无级树数据并生成DOM结构*/
                 var contactForTree = function (o) {
+                    var imgName = 'chengyuan'
                     var str = "";
                     for (var i = 0; i < o.length; i++) {
                         var urlstr = "";
                         try {
-                            urlstr = `<div><span class='contactItem' id='${o[i].id}'>${o[i].name}</span><ul id='${o[i].id}ul'>`;
+                            urlstr = `<div><span class='contactItem' id='${o[i].id}'><img width='35' height='18' src="./assets/img/${imgName}.svg"/>${o[i].name}</span><ul id='${o[i].id}ul'>`;
                             str += urlstr;
                             str += "</ul></div>";
                         } catch (e) { }
@@ -80,7 +98,7 @@
                             <div class="input-group">
                                 <input type="text" id="txtSearch" class="form-control" placeholder="按照 姓名、账号、电话查找...">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">取消</button>
+                                    <button class="btn btn-default" type="button" onclick="clearInput()">清除</button>
                                 </span>
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
@@ -88,8 +106,8 @@
                 </form>
             </div>
 
-            <button type="button" class="btn btn-danger btn-block login-button" onclick="txtSearch()">搜索</button>
-            <br><br><br>
+            <!-- <button type="button" class="btn btn-danger btn-block login-button" onclick="txtSearch()">搜索</button> -->
+            <br>
 
             <div id="contactSearchList" class="contactSearchList"></div>
 
