@@ -28,7 +28,8 @@ function createWindow() {
     // Create the browser window.
     var config = store.get('windowBounds')
     config.webPreferences = {
-        nodeIntegration: true
+        nodeIntegration: true,
+        webSecurity: false
     }
 
     mainWindow = new BrowserWindow(config);

@@ -102,16 +102,16 @@
                 res.then(obj => {
                     if (obj.status == 200) {
                         let dataList = obj.data;
-                        document.getElementById("menuTree").innerHTML = forTree(dataList,1);
+                        document.getElementById("menuTree").innerHTML = forTree(dataList, 1);
                         addClickEvent($("#menuTree").find("div span"))
                     }
                 })
 
-                function addClickEvent(target,targetType) {  // type 1，部门，2成员
+                function addClickEvent(target, targetType) {  // type 1，部门，2成员
                     target.click(function () {
 
                         if (targetType == 2) {  // 点击成员
-                            
+                            memberClick(this.id)
                             return
                         }
 
@@ -122,7 +122,7 @@
                                     if (obj.status == 200) {
                                         let dataList = obj.data;
                                         this.dataset.hasLoad = 'true'
-                                        var childHtml = forTree(dataList,1)
+                                        var childHtml = forTree(dataList, 1)
                                         var ul = document.getElementById(`${this.id}ul`)
                                         ul.innerHTML = childHtml
                                         ulExpand(this)
@@ -139,11 +139,11 @@
                                     if (obj.status == 200) {
                                         let dataList = obj.data;
                                         this.dataset.hasLoad = 'true'
-                                        var childHtml = forTree(dataList,2)
+                                        var childHtml = forTree(dataList, 2)
                                         var ul = document.getElementById(`${this.id}ul`)
                                         ul.innerHTML = childHtml
                                         ulExpand(this)
-                                        addClickEvent($(`#${this.id}ul`).find("div span"),2)
+                                        addClickEvent($(`#${this.id}ul`).find("div span"), 2)
                                     }
                                 })
                             } else {
@@ -152,7 +152,7 @@
                         }
                     })
                 }
-                
+
                 function ulExpand(target) {
                     let jul = $(target).siblings("ul")
                     if (jul.find("div").html() != null) {
@@ -164,12 +164,29 @@
                     }
                 }
 
-                function memberClick() {
-                    
+                function memberClick(id) {
+
+                    if (id == 'empty') {
+                        return;
+                    }
+
+                    console.log(`click id ${id}`)
+                    const { BrowserWindow } = require('electron').remote
+                    const path = require('path')
+
+                    const modalPath = path.join('file://', __dirname, `./assets/modules/contact/memberDetail.html?id=${id}`)
+                    let win = new BrowserWindow({
+                        width: 500,
+                        height: 500,
+                    })
+                    win.on('close', () => { win = null })
+                    win.loadURL(modalPath)
+                    // win.openDevTools()
+                    win.show()
                 }
 
                 /*递归实现获取无级树数据并生成DOM结构*/
-                var forTree = function (o,imgType) {
+                var forTree = function (o, imgType) {
 
                     var imgName = 'apartment'
                     if (imgType != 1) {
@@ -177,13 +194,13 @@
                     }
 
                     var str = "";
-                    if(o.length == 0) {
+                    if (o.length == 0) {
                         var urlstr = "";
-                            try {
-                                urlstr = `<div><span id='empty' data-has-load=${false} data-has-child=${'false'}> 暂无</span><ul id='emptyul'>`;
-                                str += urlstr;
-                                str += "</ul></div>";
-                            } catch (e) { }
+                        try {
+                            urlstr = `<div><span id='empty' data-has-load=${false} data-has-child=${'false'}> 暂无</span><ul id='emptyul'>`;
+                            str += urlstr;
+                            str += "</ul></div>";
+                        } catch (e) { }
                     } else {
                         for (var i = 0; i < o.length; i++) {
                             var urlstr = "";
@@ -197,7 +214,7 @@
 
                     return str;
                 }
-                
+
             </script>
         </body>
 
