@@ -176,8 +176,10 @@
 
                     const modalPath = path.join('file://', __dirname, `./assets/modules/contact/memberDetail.html?id=${id}`)
                     let win = new BrowserWindow({
-                        width: 500,
-                        height: 500,
+                        width: 400,
+                        height: 400,
+                        x: 0,
+                        y: 0,
                     })
                     win.on('close', () => { win = null })
                     win.loadURL(modalPath)

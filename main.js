@@ -16,8 +16,8 @@ const store = new Store({
     configName: 'user-preferences',
     defaults: {
         windowBounds: {
-            width: 800,
-            height: 600,
+            width: 998,
+            height: 807,
             x: 0,
             y: 0,
         }
@@ -42,8 +42,8 @@ function createWindow() {
     mainWindow.on('resize', saveWindowsBounds);
     mainWindow.on('move', saveWindowsBounds);
 
-    mainWindow.setMinimumSize(800, 600);
-    // mainWindow.setMaximumSize(1200,800);
+    mainWindow.setMinimumSize(998, 807);
+    mainWindow.setMaximumSize(998, 807);
 
     // and load the index.html of the app.
     async function getLoginModel() {
