@@ -77,7 +77,6 @@
                 }
 
                 var request_userOfDepartment = async function (id) {
-                    console.log('request_department')
                     var url = `${globalConfig.BaseUrl}/admin/userapi/get/${id}`;
                     var cacheString = localStorage.getItem('loginModel')
                     var obj = JSON.parse(cacheString);
@@ -103,29 +102,29 @@
                 res.then(obj => {
                     if (obj.status == 200) {
                         let dataList = obj.data;
-                        console.log(`datalist${JSON.stringify(dataList)}`)
                         document.getElementById("menuTree").innerHTML = forTree(dataList,1);
                         addClickEvent($("#menuTree").find("div span"))
                     }
                 })
 
-                function addClickEvent(target) {
+                function addClickEvent(target,targetType) {  // type 1，部门，2成员
                     target.click(function () {
-                        console.log(`${this.id}::${this.dataset.hasChild}`)
-                        if (this.dataset.hasChild == `true`) {
+
+                        if (targetType == 2) {  // 点击成员
+                            
+                            return
+                        }
+
+                        if (this.dataset.hasChild == `true`) {  // 有子部门
                             if (this.dataset.hasLoad == `false`) {
                                 let childRes = request_department(this.id)
                                 childRes.then(obj => {
                                     if (obj.status == 200) {
                                         let dataList = obj.data;
                                         this.dataset.hasLoad = 'true'
-                                        console.log(`datalist${JSON.stringify(dataList)}`)
                                         var childHtml = forTree(dataList,1)
-                                        console.log(`childHtml:${childHtml}`)
                                         var ul = document.getElementById(`${this.id}ul`)
                                         ul.innerHTML = childHtml
-                                        console.log(`ul:${ul}`)
-
                                         ulExpand(this)
                                         addClickEvent($(`#${this.id}ul`).find("div span"))
                                     }
@@ -133,22 +132,18 @@
                             } else {
                                 ulExpand(this)
                             }
-                        } else {
+                        } else { // 无子部门，请求成员
                             if (this.dataset.hasLoad == `false`) {
                                 let childRes = request_userOfDepartment(this.id)
                                 childRes.then(obj => {
                                     if (obj.status == 200) {
                                         let dataList = obj.data;
                                         this.dataset.hasLoad = 'true'
-                                        console.log(`datalist${JSON.stringify(dataList)}`)
                                         var childHtml = forTree(dataList,2)
-                                        console.log(`childHtml:${childHtml}`)
                                         var ul = document.getElementById(`${this.id}ul`)
                                         ul.innerHTML = childHtml
-                                        console.log(`ul:${ul}`)
-
                                         ulExpand(this)
-                                        addClickEvent($(`#${this.id}ul`).find("div span"))
+                                        addClickEvent($(`#${this.id}ul`).find("div span"),2)
                                     }
                                 })
                             } else {
@@ -157,6 +152,7 @@
                         }
                     })
                 }
+                
                 function ulExpand(target) {
                     let jul = $(target).siblings("ul")
                     if (jul.find("div").html() != null) {
@@ -181,14 +177,24 @@
                     }
 
                     var str = "";
-                    for (var i = 0; i < o.length; i++) {
+                    if(o.length == 0) {
                         var urlstr = "";
-                        try {
-                            urlstr = `<div><span id='${o[i].id}' data-has-load=${false} data-has-child=${o[i].hasChild}> <img width='30' height='20' src="./assets/img/${imgName}.svg" />${o[i].name}</span><ul id='${o[i].id}ul'>`;
-                            str += urlstr;
-                            str += "</ul></div>";
-                        } catch (e) { }
+                            try {
+                                urlstr = `<div><span id='empty' data-has-load=${false} data-has-child=${'false'}> 暂无</span><ul id='emptyul'>`;
+                                str += urlstr;
+                                str += "</ul></div>";
+                            } catch (e) { }
+                    } else {
+                        for (var i = 0; i < o.length; i++) {
+                            var urlstr = "";
+                            try {
+                                urlstr = `<div><span id='${o[i].id}' data-has-load=${false} data-has-child=${o[i].hasChild}> <img width='30' height='20' src="./assets/img/${imgName}.svg" />${o[i].name}</span><ul id='${o[i].id}ul'>`;
+                                str += urlstr;
+                                str += "</ul></div>";
+                            } catch (e) { }
+                        }
                     }
+
                     return str;
                 }
                 

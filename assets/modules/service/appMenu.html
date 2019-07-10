@@ -38,9 +38,10 @@
                     if (isRequesting) {
                         return
                     }
-
+                    $('#loading-svg').addClass('is-shown')
                     var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
-                    let userName = `taiji`
+                    let loginUser = require('electron').remote.getGlobal('loginUser')
+                    let userName = loginUser.username
 
                     let token = getWebTokenWithUserName(userName);
 
@@ -53,6 +54,7 @@
                         body: `token=${token}&userName=${userName}`
                     })
                         .then(res => {
+                            $('#loading-svg').removeClass('is-shown')
                             console.log(`menu res:${res.url}`)
                             res.json().then(function (obj) {
                                 if (obj.code == 0) {
@@ -111,6 +113,7 @@
                             })
                         })
                         .catch(error => {
+                            $('#loading-svg').removeClass('is-shown')
                             alert('Error:', error)
                             console.log(error)
                         })
