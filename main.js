@@ -42,8 +42,8 @@ function createWindow() {
     mainWindow.on('resize', saveWindowsBounds);
     mainWindow.on('move', saveWindowsBounds);
 
-    mainWindow.setMinimumSize(998, 807);
-    mainWindow.setMaximumSize(998, 807);
+    // mainWindow.setMinimumSize(998, 807);
+    // mainWindow.setMaximumSize(998, 807);
 
     // and load the index.html of the app.
     async function getLoginModel() {

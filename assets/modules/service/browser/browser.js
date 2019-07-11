@@ -6,12 +6,12 @@ onload = function() {
     this.console.log(webview)
     doLayout();
 
-    document.querySelector('#back').onclick = function() {
-        webview.goBack();
+    document.querySelector('#browser-back').onclick = function() {
+        // webview.goBack();
     };
 
-    document.querySelector('#forward').onclick = function() {
-        webview.goForward();
+    document.querySelector('#browser-forward').onclick = function() {
+        // webview.goForward();
     };
 
     // document.querySelector('#home').onclick = function() {
@@ -243,8 +243,8 @@ function handleLoadCommit() {
     resetExitedState();
     var webview = document.querySelector('webview');
     // document.querySelector('#location').value = webview.getURL();
-    document.querySelector('#back').disabled = !webview.canGoBack();
-    document.querySelector('#forward').disabled = !webview.canGoForward();
+    document.querySelector('#browser-back').disabled = !webview.canGoBack();
+    document.querySelector('#browser-forward').disabled = !webview.canGoForward();
     closeBoxes();
 }
 

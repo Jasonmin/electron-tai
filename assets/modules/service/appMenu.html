@@ -124,6 +124,22 @@
                     webview.setAttribute('src', '')
                     $('#app-menu-browser').removeClass('is-shown')
                 })
+
+                $('#browser-back').click(function () {
+                    let webview = document.getElementById('app-webview')
+                    if (webview.canGoBack()) {
+                        webview.goBack()
+                    }
+                    console.log(webview.getURL())
+                })
+
+                $('#browser-forward').click(function () {
+                    let webview = document.getElementById('app-webview')
+                    if (webview.canGoForward()) {
+                        webview.goForward()
+                    }
+                    console.log(webview.getURL())
+                })
             </script>
         </head>
 
@@ -134,8 +150,8 @@
             <div class="grid container"></div>
             <div id="app-menu-browser" class="app-menu-browser">
                 <div id="controls" class="browser-control">
-                    <button id="back" title="Go Back" disabled="true">&#9664;</button>
-                    <button id="forward" title="Go Forward" disabled="true">&#9654;</button>
+                    <button id="browser-back" title="Go Back" width='60'>&#9664;</button>
+                    <button id="browser-forward" title="Go Forward" width='60' >&#9654;</button>
                     <button id="browser-close" title="关闭">关闭</button>
                     <h4 id="app-title" class="app-title">标题</h4>
                 </div>
