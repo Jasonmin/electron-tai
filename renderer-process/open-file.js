@@ -8,5 +8,7 @@ selectDirBtn.addEventListener('click', (event) => {
 })
 
 ipcRenderer.on('selected-directory', (event, path) => {
+
     document.getElementById('selected-file').innerHTML = `You selected: ${path}`
+        // request_modefyPortrait()
 })

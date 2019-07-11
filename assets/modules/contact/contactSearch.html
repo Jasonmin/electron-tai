@@ -56,7 +56,7 @@
                         body: $("#txtSearch").val()
                     }, signal).then(res => {
                         res.json().then(function (obj) {
-                            // console.log(`contact list:${JSON.stringify(obj.data)}`)
+                            // console.log(`contact list:${JSON.stringify(obj.data)}`)    
                             let dataList = obj.data
                             if (dataList == undefined) {
                                 return;
@@ -64,7 +64,7 @@
                             
                             let str = contactForTree(dataList)
                             document.getElementById("contactSearchList").innerHTML = str
-                            addClickEvent($("#contactSearchList").find("div span"))
+                            addClickEvent($("#contactSearchList").find("div span"),2)
                         })
                     }).catch(error => {
                         alert('Error:', error)

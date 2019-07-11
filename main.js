@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
-const { ipcMain } = require('electron')
+const { ipcMain, dialog } = require('electron')
 
 const glob = require('glob')
 const path = require('path')
@@ -10,6 +10,13 @@ const { localStorage } = require('electron-browser-storage');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+
+initialize()
+
+function initialize() {
+    makeSingleInstance()
+    loadMainProcess()
+}
 
 // initialize the store
 const store = new Store({
@@ -106,8 +113,21 @@ app.on('activate', function() {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+function makeSingleInstance() {
+    if (process.mas) return
+
+    app.requestSingleInstanceLock()
+
+    app.on('second-instance', () => {
+        if (mainWindow) {
+            if (mainWindow.isMinimized()) mainWindow.restore()
+            mainWindow.focus()
+        }
+    })
+}
+
 // Require each JS file in the main-process dir
-function loadDemos() {
+function loadMainProcess() {
     const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
     files.forEach((file) => { require(file) })
 }
