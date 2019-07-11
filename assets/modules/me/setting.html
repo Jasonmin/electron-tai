@@ -10,23 +10,32 @@
 
         <body>
             <div><br><br></div>
+            <!-- <button type="button" class="btn btn-primary btn-block login-button" onclick="about()">关于</button> -->
             <button type="button" class="btn btn-danger btn-block login-button" onclick="loginOut()">退出</button>
-            <!-- <button id="test-loading" type="button" class="btn btn-danger btn-block login-button">show loading</button>
-            <button id="test-loading2" type="button" class="btn btn-danger btn-block login-button">dimiss loading</button> -->
         </body>
 
         <script>
+            function about() {
+                const { showAboutWindow } = require('electron-util');
+                showAboutWindow({
+                    // icon: path.join(__dirname, 'static/Icon.png'),
+                    icon: null,
+                    copyright: '太极计算机股份有限公司',
+                    text: '桌面采编'
+                });
+            }
+
             function loginOut() {
                 console.log(`login out`)
                 localStorage.removeItem('loginModel')
                 sendLoginChangeNotification()
             }
 
-            $('#test-loading').click(function(){
+            $('#test-loading').click(function () {
                 $('#loading-svg').addClass('is-shown')
             })
 
-            $('#test-loading2').click(function(){
+            $('#test-loading2').click(function () {
                 $('#loading-svg').removeClass('is-shown')
             })
         </script>
