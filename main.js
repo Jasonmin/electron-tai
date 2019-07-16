@@ -79,7 +79,7 @@ function createWindow() {
 
 function loadTargetPage(loginData) {
     if (loginData) { // 已登录
-        mainWindow.loadFile('./index.html')
+        mainWindow.loadFile('./imdist/index.html')
         global.loginModel = loginData
         global.loginUser = (JSON.parse(loginData)).data;
     } else { // 未登录
