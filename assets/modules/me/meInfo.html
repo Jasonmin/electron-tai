@@ -46,7 +46,7 @@
                     document.getElementById("username").innerHTML = userData.username
                     document.getElementById("department").innerHTML = userData.departmentName ? userData.departmentName : ""
                     document.getElementById("name").innerHTML = userData.name
-                    // document.getElementById("user_image").src = userData.portraituri
+                    document.getElementById("user_image").src = userData.portraituri
                 }
 
                 function request_modefyPortrait(file) {
@@ -54,7 +54,7 @@
                     const fileData = new FormData()
                     // fileData.append('profile', 'profile.jpg')
                     fileData.append('profile', file)
-
+                    $('#loading-svg').addClass('is-shown')
                     var url = `${globalConfig.BaseUrl}/admin/userapi/profiles/${userId}`;
                     fetch(url, {
                         method: "PUT",
@@ -64,14 +64,19 @@
                         },
                         body: fileData
                     }).then(res => {
+                        $('#loading-svg').removeClass('is-shown')
                         res.json().then(function (obj) {
-                            let imgUrl = obj.data
                             console.log(`res:${JSON.stringify(obj)}`)
+                            if (obj.status != 200) {
+                                alert(obj.message)
+                                return;
+                            }
+                            let imgUrl = obj.data
                             console.log(`res imgurl:${imgUrl}`)
-                            // let userData = obj.data;
-                            // document.getElementById(`user_image`).src = imgUrl
+                            document.getElementById(`user_image`).src = imgUrl
                         })
                     }).catch(error => {
+                        $('#loading-svg').removeClass('is-shown')
                         alert('Error:', error)
                         console.log(error)
                     })
