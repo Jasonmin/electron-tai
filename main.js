@@ -35,7 +35,8 @@ function createWindow() {
     // Create the browser window.
     var config = store.get('windowBounds')
     config.webPreferences = {
-        nodeIntegration: true,
+        // nodeIntegration: true,
+        nodeIntegration: false, // elec-zq 
         webSecurity: false
     }
 
@@ -79,7 +80,8 @@ function createWindow() {
 
 function loadTargetPage(loginData) {
     if (loginData) { // 已登录
-        mainWindow.loadFile('./imdist/index.html')
+        // mainWindow.loadFile('./imdist/index.html')
+        mainWindow.loadFile('./imbuild/index.html')
         global.loginModel = loginData
         global.loginUser = (JSON.parse(loginData)).data;
     } else { // 未登录
