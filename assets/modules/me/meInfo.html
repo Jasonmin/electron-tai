@@ -29,6 +29,10 @@
                     }).then(res => {
                         res.json().then(function (obj) {
                             console.log(`userinfo:${JSON.stringify(obj)}`)
+                            if (obj.status == 40301) {
+                                alert(`token 已过期`)
+                                return;
+                            }
                             let userData = obj.data;
                             configUserInfoUI(userData);
                             // request_getAppMenus();
@@ -42,7 +46,7 @@
                 }
 
                 function configUserInfoUI(userData) {
-                    console.log(`res imgurl:${userData.portraituri}`)
+                    // console.log(`res imgurl:${userData.portraituri}`)
                     document.getElementById("username").innerHTML = userData.username
                     document.getElementById("department").innerHTML = userData.departmentName ? userData.departmentName : ""
                     document.getElementById("name").innerHTML = userData.name
