@@ -79,14 +79,14 @@ function createWindow() {
 }
 
 function loadTargetPage(loginData) {
-    if (loginData) { // 已登录
-        // mainWindow.loadFile('./index.html')
-        mainWindow.loadFile('./imbuild/index.html')
-        global.loginModel = loginData
-        global.loginUser = (JSON.parse(loginData)).data;
-    } else { // 未登录
-        mainWindow.loadFile('./assets/login.html')
-    }
+    // if (loginData) { // 已登录
+    // mainWindow.loadFile('./index.html')
+    mainWindow.loadFile('./imbuild/index.html')
+    global.loginModel = loginData
+    global.loginUser = (JSON.parse(loginData)).data;
+    // } else { // 未登录
+    //     mainWindow.loadFile('./assets/login.html')
+    // }
 }
 
 // This method will be called when Electron has finished

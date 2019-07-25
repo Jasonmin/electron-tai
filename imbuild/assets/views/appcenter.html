@@ -1,0 +1,167 @@
+<!-- <template class="task-template">
+    <section id="appMenu-section" data-loaded=false class="section js-section u-category-default"> -->
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- <title>app center</title> -->
+
+
+    <!-- <script>
+        var isRequesting = false
+
+        var e = document.getElementById('appMenu-section')
+        var observer = new MutationObserver(function(event) {
+            let isShown = e.classList[3]
+            if (isShown == 'is-shown' && e.dataset.loaded == "false") {
+                request_getAppMenus()
+            }
+        })
+        observer.observe(e, {
+            attributeFilter: ['class']
+        })
+
+        function menuButtonClick(item) {
+            console.log(`==>${item.dataset.name},${item.dataset.url}`)
+            $('#app-menu-browser').addClass('is-shown')
+            let webview = document.getElementById('app-webview')
+            let loginUser = require('electron').remote.getGlobal('loginUser')
+            webview.setAttribute('src', `${item.dataset.url}?username=${loginUser.username}`)
+            $('#app-title').html(item.dataset.name)
+        }
+
+        $('app-img').click(function() {
+            console.log(`hehe app-img`)
+        })
+
+        function request_getAppMenus() {
+
+            if (isRequesting) {
+                return
+            }
+            $('#loading-svg').addClass('is-shown')
+            var url = `${globalConfig.serviceUrl}/AppApi/GetAppMenus`;
+            let loginUser = require('electron').remote.getGlobal('loginUser')
+            let userName = loginUser.username
+
+            let token = getWebTokenWithUserName(userName);
+
+            isRequesting = true
+            fetch(url, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `token=${token}&userName=${userName}`
+                })
+                .then(res => {
+                    $('#loading-svg').removeClass('is-shown')
+                    console.log(`menu res:${res.url}`)
+                    res.json().then(function(obj) {
+                        if (obj.code == 0) {
+                            var e = document.getElementById('appMenu-section')
+                            e.dataset.loaded = "true"
+
+                            var menus = obj.data;
+                            console.log(menus)
+
+                            let colCount = 4;
+                            let rowCount = menus.length / colCount;
+
+                            let grid = new Grid({
+                                container: document.getElementsByClassName('grid')[0], // 必须项
+                                colCount: colCount,
+                                rowCount: rowCount,
+                                width: 600,
+                                height: 150 * rowCount,
+                            });
+                            let grids = grid.getGrids();
+                            for (let i = 0; i < menus.length; i++) {
+                                let item = menus[i]
+                                let aGrid = grids[i]
+
+
+                                let br1 = document.createElement('br')
+                                aGrid.appendChild(br1)
+                                let br10 = document.createElement('br')
+                                    // aGrid.appendChild(br10)
+
+                                let img = document.createElement('img')
+                                img.src = item.icon
+                                img.width = 60
+                                img.height = 60
+                                img.class = 'app-img'
+                                img.setAttribute('data-url', item.url)
+                                img.setAttribute('data-name', item.name)
+                                img.setAttribute('onClick', "menuButtonClick(this)")
+                                aGrid.appendChild(img)
+
+                                let br2 = document.createElement('br')
+                                aGrid.appendChild(br2)
+
+                                let a = document.createElement('button');
+                                a.innerHTML = item.name
+                                a.id = 'menu-button'
+                                    // a.href = `${item.url}?username=taiji`
+                                a.class = 'u-visible-to-screen-reader'
+                                a.setAttribute('onClick', "menuButtonClick(this)")
+                                a.setAttribute('data-url', item.url)
+                                a.setAttribute('data-name', item.name)
+                                aGrid.appendChild(a)
+                            }
+                            console.log(grid.getGrids());
+                        }
+                    })
+                })
+                .catch(error => {
+                    $('#loading-svg').removeClass('is-shown')
+                    alert('Error:', error)
+                    console.log(error)
+                })
+        }
+
+        $('#browser-close').click(function() {
+            let webview = document.getElementById('app-webview')
+            webview.setAttribute('src', '')
+            $('#app-menu-browser').removeClass('is-shown')
+        })
+
+        $('#browser-back').click(function() {
+            let webview = document.getElementById('app-webview')
+            if (webview.canGoBack()) {
+                webview.goBack()
+            }
+            console.log(webview.getURL())
+        })
+
+        $('#browser-forward').click(function() {
+            let webview = document.getElementById('app-webview')
+            if (webview.canGoForward()) {
+                webview.goForward()
+            }
+            console.log(webview.getURL())
+        })
+    </script> -->
+</head>
+
+<h1>应用中心</h1>
+
+<body>
+
+    <!-- <div class="grid container"></div>
+    <div id="app-menu-browser" class="app-menu-browser">
+        <div id="controls" class="browser-control">
+            <button id="browser-back" title="Go Back" width='60'>&#9664;</button>
+            <button id="browser-forward" title="Go Forward" width='60'>&#9654;</button>
+            <button id="browser-close" title="关闭">关闭</button>
+            <h4 id="app-title" class="app-title">标题</h4>
+        </div>
+        <div>
+            <webview id="app-webview" class="webview-wrapper" src=""></webview>
+        </div>
+    </div> -->
+</body>
+
+<!-- </section> -->
+
+<!-- </template> -->

@@ -3,6 +3,23 @@
         <div class="no_network"><span>当前网络不可用，请检查你的网络设置</span></div>
         <div class="toolbar pull-left" ng-show="!showState.isPhone||!showState.isChat">
             <div class="bar LeftNav">
+                <div class="LeftNav-item iconfont-single" title="会话" ng-class="{cur:!switchbtn.isFriendList}" ng-click="switchbtn.isAppCenter=false;switchbtn.isFriendList=false;switchbtn.issearchList=false">
+                    <div class="singleChat">
+                        <a>single chat</a>
+                        <i class="badge bg-tred" ng-show="mainData.conversation.totalUnreadCount>0">{{mainData.conversation.totalUnreadCount>99 ? "99+" : mainData.conversation.totalUnreadCount}}</i>
+                    </div>
+                </div>
+                <div class="LeftNav-item iconfont-group" title="联系人" ng-class="{cur:switchbtn.isFriendList}" ng-click="switchbtn.isAppCenter=false;switchbtn.isFriendList=true;switchbtn.issearchList=false">
+                    <div class="groupChat">
+                        <a>group chat</a>
+                        <i class="Presence Presence--stacked" ng-show="mainData.notification.hasNewNotification"></i>
+                    </div>
+                </div>
+                <div class="LeftNav-item iconfont-app-center" title="应用中心" ng-class="{cur:switchbtn.isAppCenter}" ng-click="switchbtn.isAppCenter=true;switchbtn.isFriendList=false;switchbtn.issearchList=false">
+                    <div class="appCenter">
+                        <a>app center</a>
+                    </div>
+                </div>
                 <div class="LeftNav-item" title="我的" ui-sref="main.userinfo">
                     <div class="user">
                         <div id="loginuser" class="portrait" ng-show="!mainData.loginUser.portraitUri">
@@ -10,18 +27,6 @@
                         </div>
                         <img class="userPic Avatar--22" ng-show="mainData.loginUser.portraitUri" ng-src="{{mainData.loginUser.portraitUri||'assets/img/barBg.png'}}">
                         <!-- <i class="Presence Presence--stacked Presence--toolbar"></i> -->
-                    </div>
-                </div>
-                <div class="LeftNav-item iconfont-single" title="会话" ng-class="{cur:!switchbtn.isFriendList}" ng-click="switchbtn.isFriendList=false;switchbtn.issearchList=false">
-                    <div class="singleChat">
-                        <a>single chat</a>
-                        <i class="badge bg-tred" ng-show="mainData.conversation.totalUnreadCount>0">{{mainData.conversation.totalUnreadCount>99 ? "99+" : mainData.conversation.totalUnreadCount}}</i>
-                    </div>
-                </div>
-                <div class="LeftNav-item iconfont-group" title="联系人" ng-class="{cur:switchbtn.isFriendList}" ng-click="switchbtn.isFriendList=true;switchbtn.issearchList=false">
-                    <div class="groupChat">
-                        <a>group chat</a>
-                        <i class="Presence Presence--stacked" ng-show="mainData.notification.hasNewNotification"></i>
                     </div>
                 </div>
                 <div class="LeftNav-item iconfont-add" addbtn>
@@ -38,11 +43,12 @@
             </div>
         </div>
         <div class="mainBox pull-left" ng-show="!showState.isPhone||!showState.isChat">
-            <div id="search-friend">
+            <div id="search-friend" ng-show="!switchbtn.isAppCenter">
+                <!-- <div id="search-friend"> -->
                 <search-input search="search(content)" control="searchControl" delay-time="0" show-text="搜索">
                 </search-input>
             </div>
-            <div id="chatArea" class="chatArea" ng-show="!switchbtn.isFriendList&&!switchbtn.issearchList">
+            <div id="chatArea" class="chatArea" ng-show="!switchbtn.isFriendList&&!switchbtn.issearchList&&!switchbtn.isAppCenter">
                 <p class="withoutFriends" style="text-align:center;margin-top: 200px;" ng-show="!mainData.conversation.conversations||!mainData.conversation.conversations.length">您还没有添加会话
                 </p>
                 <conversation ng-repeat="item in mainData.conversation.conversations" item='item'></conversation>
@@ -104,6 +110,15 @@
                     </div>
                     <!-- <groupitem  ng-repeat="item in searchList.groupList" item="item"></groupitem> -->
                 </div>
+            </div>
+            <div class="communicateList" ng-show="switchbtn.isAppCenter">
+                <div class="groupArea">
+                    <div class="groupAreaBody">
+                        <appitem ng-repeat="item in mainData.contactsList.groupList" item="item" class="noticeBarList">
+                        </appitem>
+                    </div>
+                </div>
+
             </div>
         </div>
 
