@@ -35,8 +35,8 @@ function createWindow() {
     // Create the browser window.
     var config = store.get('windowBounds')
     config.webPreferences = {
-        // nodeIntegration: true,
-        nodeIntegration: false, // elec-zq 
+        nodeIntegration: true,
+        // nodeIntegration: false, // elec-zq 
         webSecurity: false
     }
 

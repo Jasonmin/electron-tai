@@ -12,6 +12,7 @@
 window.__sealtalk_config = {
     serverIP: "https://218.23.218.22:9080/",
     serverUrl: "https://218.23.218.22:9080/api",
+    h5AppUrl: "http://218.23.218.22:8088",
     // serverUrl: "http://api.sealtalk.im",
     appkey: "pvxdm17jpoekr",
     ryToken: "W/6qvXrdtwuiqZNy/2ja98B7fGl9S2yjF6RCtx3MPHWtOnB4ekNZC1Xkq9698+aR8cWh+uP2a7m5OxL/Y7FuSw==",
