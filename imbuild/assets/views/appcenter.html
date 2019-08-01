@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
 
     <title>应用中心</title>
-    <script>
+    <!-- <script>
         var item = {}
 
         var appname = this.routerinfo.snapshot.queryParams["appname"]
@@ -38,7 +38,7 @@
             }
             console.log(webview.getURL())
         })
-    </script>
+    </script> -->
 </head>
 
 <!-- <div id="app-menu-browser" class="app-menu-browser is-shown">
@@ -54,27 +54,27 @@
 </div> -->
 
 <div class="chatBoxInner">
-    <div class="box_hd">
+    <div class="box_hd title_wrap">
         <div id="controls" class="browser-control">
-            <button id="browser-back" title="Go Back" width='60'>&#9664;</button>
-            <button id="browser-forward" title="Go Forward" width='60'>&#9654;</button>
-            <button id="browser-close" title="关闭">关闭</button>
+            <button id="browser-back" title="Go Back" ng-click="back()" width='60'>&#9664;</button>
+            <button id="browser-forward" title="Go Forward" ng-click="forward()" width='60'>&#9654;</button>
+            <button id="browser-close" title="关闭" ng-click="close()">关闭</button>
             <h4 id="app-title" class="app-title">标题</h4>
         </div>
         <!-- <div class="title_wrap">
-            <a class="phone_return" ng-click="back()"><span class="backArrow"><</span>返回</a>
+            <a class="phsone_return" ng-click="back()"><span class="backArrow"><</span>返回</a>
             <button id="browser-back" title="Go Back" width='60'>&#9664;</button>
             <button id="browser-forward" title="Go Forward" width='60'>&#9654;</button>
             <div class="title">
                 <a class="title_name">群资料</a>
             </div>
-            <!-- <a class="editBtn" href="javascript:void 0" ng-click="isEditable=!isEditable"><span ng-if="!isEditable">编辑</span><span ng-if="isEditable">取消</span></a> -->
-    </div> -->
-</div>
-
-<div id="functionBox">
-    <div>
-        <webview id="app-webview" class="webview-wrapper" src=""></webview>
+            <a class="editBtn" href="javascript:void 0" ng-click="isEditable=!isEditable"><span ng-if="!isEditable">编辑</span><span ng-if="isEditable">取消</span></a>
+        </div> -->
     </div>
-</div>
+
+    <div id="functionBox">
+        <div>
+            <webview id="app-webview" class="webview-wrapper" src=""></webview>
+        </div>
+    </div>
 </div>
