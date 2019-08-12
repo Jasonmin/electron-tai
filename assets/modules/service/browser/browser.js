@@ -2,17 +2,21 @@ window.onresize = doLayout;
 var isLoading = false;
 
 onload = function() {
-    var webview = document.querySelector('webview');
+
+    return;
+
+    // var webview = document.querySelector('webview');
+    var webview = document.querySelector('#app-webview');
     this.console.log(webview)
     doLayout();
 
-    document.querySelector('#browser-back').onclick = function() {
-        // webview.goBack();
-    };
+    // document.querySelector('#browser-back').onclick = function() {
+    //     // webview.goBack();
+    // };
 
-    document.querySelector('#browser-forward').onclick = function() {
-        // webview.goForward();
-    };
+    // document.querySelector('#browser-forward').onclick = function() {
+    //     // webview.goForward();
+    // };
 
     // document.querySelector('#home').onclick = function() {
     // navigateTo('http://www.github.com/');
@@ -147,15 +151,15 @@ function navigateTo(url) {
 
 function doLayout() {
     var webview = document.querySelector('webview');
-    var controls = document.querySelector('#controls');
-    var controlsHeight = controls.offsetHeight;
+    // var controls = document.querySelector('#controls');
+    // var controlsHeight = controls.offsetHeight;
     var windowWidth = document.documentElement.clientWidth;
     var windowHeight = document.documentElement.clientHeight;
     var webviewWidth = windowWidth;
-    var webviewHeight = windowHeight - controlsHeight;
+    // var webviewHeight = windowHeight - controlsHeight;
 
     // webview.style.width = webviewWidth + 'px';
-    webview.style.height = webviewHeight + 'px';
+    // webview.style.height = webviewHeight + 'px';
 
     // var sadWebview = document.querySelector('#sad-webview');
     // sadWebview.style.width = webviewWidth + 'px';
